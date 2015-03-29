@@ -1,0 +1,34 @@
+<osm-script output="json" timeout="25">
+  <!-- gather results -->
+  <union>
+    <!-- query part for: “shop” -->
+    <query type="node">
+      <has-kv k="amenity" />
+      <bbox-query {{bbox}}/> 
+    </query>
+    <query type="way">
+      <has-kv k="amenity" />
+      <bbox-query {{bbox}}/> 
+    </query>
+    <query type="relation">
+      <has-kv k="amenity" />
+      <bbox-query {{bbox}}/> 
+    </query>
+    <query type="node">
+      <has-kv k="shop"/>
+      <bbox-query {{bbox}}/> 
+    </query>
+    <query type="way">
+      <has-kv k="shop"/>
+      <bbox-query {{bbox}}/> 
+    </query>
+    <query type="relation">
+      <has-kv k="shop"/>
+      <bbox-query {{bbox}}/> 
+    </query>
+  </union>
+  <!-- print results -->
+  <print mode="body"/>
+  <recurse type="down"/>
+  <print mode="skeleton" order="quadtile"/>
+</osm-script>
