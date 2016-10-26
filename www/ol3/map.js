@@ -19,25 +19,13 @@ var webmap = {
 	   target: document.getElementById('map'),  // instead of "target: 'map' " because of the cursor pointer
 	   view: new ol.View({
 	   	center: ol.proj.transform([5.54, 49.73], 'EPSG:4326', 'EPSG:3857'),
-	      zoom: 12
+	      zoom: 13
 	   })
 	}),
 
-	/*
-   // Define the style of the layer TO DO/REVOIR
-   iconStyle : new ol.style.Style({
-      image: new ol.style.Icon({
-        anchor: [0.5, 46],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        opacity: 0.75,
-        src: 'img/maps_icon.png'
-        })
-    }),
-   */
-		
+	
 	///////////////
-	// FUNCTIONS //   
+	// FUNCTIONS //   - by alphabetic order, except init()
 	///////////////
 	
 
@@ -84,24 +72,89 @@ var webmap = {
       olmap.getTarget().style.cursor = hit ? 'pointer' : '';
     });
  */
+ 
+ 
    // Add points of interests to the list
    add2list: function(index, feature, category) {
-   	console.log(feature)
-      var imgfile // TO DO: faire le mapping pour générer cette variable.    	
+   	//console.log(feature)
+   	// TO DO: delete index if not needed in the OL3 gestion of firing popups. 
+   	var featureName, catItems, imgFile;
    	
       if (feature.properties.name != undefined){
          featureName = feature.properties.name;
          }
       else {
       	featureName = "";
-      	}  
+      	}         
+           
+      [catItems, imgFile] = webmap.mapCategory(feature);
       	
-      if (feature.properties.amenity == category){ // TO DO: changer cette condition pour faire le mapping
-         $("#list").append("<tr><td><img class='icon_list' src='img/" + imgfile + ".png' onclick='selectlist(" + index + ")'></td><td>" + featureName + "</td></tr>");
-         }
+      if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
+         $("#list").append("<tr><td><img class='icon_list' src='img/" + imgFile + ".png' onclick='selectlist(" + index + ")'></td><td>" + featureName + "</td></tr>");
+      }
    },
-   
- 
+
+	
+	// User experience / responsiveness functions (using jquery)
+	// Hide/show panel
+	collapsePanel : function(){
+		if(webmap.showPanel === true){
+		   $('div#panel').css('width','35px');
+		   $('div#panelContent').css('opacity','0');
+		   $('div#collapseBtn button').text('>');
+		   webmap.showPanel =! webmap.showPanel;
+		}
+	   else{
+		   $('div#panel').css('width','300px');
+		   $('div#panelContent').css('opacity','1');
+		   $('div#collapseBtn button').text('<');
+		   webmap.showPanel =! webmap.showPanel;
+		}
+	},
+	
+	collapsePanelXs : function(){
+		if(webmap.showPanelXs === true){
+		  $('div#panel').css('width','0px');
+		  $('div#panelContent').css('opacity','0' );
+		  webmap.showPanelXs =! webmap.showPanelXs;
+		  }
+	   else{
+	     $('div#panel').css('width','calc(100% - 45px)');
+	     $('div#panelContent').css('opacity','1');
+		  webmap.showPanelXs =! webmap.showPanelXs;
+		  }
+	},
+	
+   // Test if feature is in category and return corresponding icon file
+   mapCategory : function (feature) {
+     var cat, img_file, OSM_key_in_geojson, OSM_value_in_geojson    	
+   	
+     if (feature.properties.amenity != undefined){
+     	  OSM_key_in_geojson = "amenity";    
+        OSM_value_in_geojson = feature.properties.amenity;
+        console.log('amenity') ;   
+     }  
+     if (feature.properties.shop != undefined){
+     	  OSM_key_in_geojson = "shop";    
+        OSM_value_in_geojson = feature.properties.shop;      
+     }     
+     else {
+     	  OSM_key_in_geojson = undefined;    
+        OSM_value_in_geojson = undefined;  
+        //console.log("No exploitable categories ");
+     } 
+     
+     // loop over the category on items.json
+     for (i = 0; i < items.length; i++) {
+        if (items[i].OSM_key == OSM_key_in_geojson && items[i].OSM_value == OSM_value_in_geojson){
+           cat = items[i].category;
+           img_file = items[i].png_file;
+        }
+     }         
+        
+     return [cat, img_file];
+   },	
+	
 	// Populate the list
    populateList : function(url) {
    	
@@ -134,36 +187,44 @@ var webmap = {
          $("#list").append("</table>");
       
       });
-   },
+   },	
 	
-	// User experience / responsiveness functions (using jquery)
-	// Hide/show panel
-	collapsePanel : function(){
-		if(webmap.showPanel === true){
-		   $('div#panel').css('width','35px');
-		   $('div#panelContent').css('opacity','0');
-		   $('div#collapseBtn button').text('>');
-		   webmap.showPanel =! webmap.showPanel;
-		}
-	   else{
-		   $('div#panel').css('width','300px');
-		   $('div#panelContent').css('opacity','1');
-		   $('div#collapseBtn button').text('<');
-		   webmap.showPanel =! webmap.showPanel;
-		}
+	// Set the GeoJSON layer
+	setGeojsonLayer : function () {
+		// Define the source of the data
+	   var geojsonSource = new ol.source.Vector({
+         url: webmap.url,
+         format: new ol.format.GeoJSON()
+      });
+      
+      // Define the style
+      var iconStyle = webmap.setStyle()
+      
+      // Define the layer      
+      var geojsonLayer = new ol.layer.Vector({
+         title: 'Carte des Services',
+         source: geojsonSource,
+         style: iconStyle
+         // un truc du genre: onEach: setStyle();
+         // + filter;
+      });
+       
+      return geojsonLayer;  	
 	},
-	
-	collapsePanelXs : function(){
-		if(webmap.showPanelXs === true){
-		  $('div#panel').css('width','0px');
-		  $('div#panelContent').css('opacity','0' );
-		  webmap.showPanelXs =! webmap.showPanelXs;
-		  }
-	   else{
-	     $('div#panel').css('width','calc(100% - 45px)');
-	     $('div#panelContent').css('opacity','1');
-		  webmap.showPanelXs =! webmap.showPanelXs;
-		  }
+	 
+	 
+	// Set the style of the geojson layer
+	setStyle : function () {
+	   var styleGeojson = new ol.style.Style({
+         image: new ol.style.Icon({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            opacity: 0.75,
+            src: 'img/car.png'
+         })
+      })
+      return styleGeojson;  	
 	},
 	
 	// Show map panel (jquery)	
@@ -181,18 +242,10 @@ var webmap = {
 		var osmLayer = new ol.layer.Tile({
 	      source: new ol.source.OSM()
 	   });
-	   webmap.olmap.addLayer(osmLayer);
+	   //webmap.olmap.addLayer(osmLayer);
 	   
 	   // Add POI layer (OpenLayers 3)
-	   var geojsonSource = new ol.source.Vector({
-         url: webmap.url,
-         format: new ol.format.GeoJSON()
-      });
-      var geojsonLayer = new ol.layer.Vector({
-         title: 'Carte des Services',
-         source: geojsonSource
-         //style: iconStyle
-       });
+      var geojsonLayer = webmap.setGeojsonLayer();
       webmap.olmap.addLayer(geojsonLayer);
 	   
 	   // Add specific classes to OpenLayers elements  (using jquery & Bootstrap class)

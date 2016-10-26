@@ -60,14 +60,6 @@ div#map {
   padding-left: 0px;
 }
 
-div#graph {
-  height: 100%;         /* to specify the full height for the map, works only if height is set in body and parent divs */ 
-  background-color: #e0f3fc; 
-  padding-right: 0px;   /* need to overwrite the padding-right and padding-left set by bootstrap */
-  padding-left: 310px;  /* need to set the graph at the right of the panel by default */
-  padding-top: 40px;
-}
-
 div#panel {
   position: absolute;
   top: 50px;
@@ -112,30 +104,12 @@ div#panelContent {
   transition: opacity 0.6s;
 }
   
-div#panelButtons button{
-  margin-top: 4px;
-}
-
-div#legend {
-  margin-top: 40px;
-  opacity: 0;
-  -webkit-transition: opacity 1s;
-  transition: opacity 1s;
-}
-
-div#legend p{
-  font-weight: bold;
-}
-
 @media all and (max-width: 768px) {
   div#panel {
   	 width: 0px;
   	 }
   div#panelContent{
   	 opacity: 0;
-  }
-  div#graph{
-    padding-left: 10px;  
   }
 }
 
@@ -156,36 +130,13 @@ div#legend p{
    }
 }
 
-.ol-scale-line {
-	right: 40px;
-	left: auto;
+
+.icon_list {
+	cursor:pointer;
+        margin-right:4px;
 }
 
-/* Loading cursor */
-body.loading *{
-	cursor:progress !important;
-}
-
-.loading *{
-	cursor:progress !important;
-}
-
-/* Modal window for tables of data */
-
-.modal-body tr{
-}
-
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th  {
-   background-color: #ddd; 
- }
- 
-/* Graphs */
-/* for histogram */
-.bar rect {
-  fill: steelblue;
-}
-
-.bar text {
-  fill: #fff;
-  font: 10px sans-serif;
+.icon_list:hover {
+        
+	background-color: #EEE7E7;
 }
