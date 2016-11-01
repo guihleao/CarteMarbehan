@@ -5,7 +5,7 @@ var webmap = {
    ///////////////
 	// VARIABLES //
 	///////////////
-	
+	globalvar : undefined,
 	showPanel : true,
 	showPanelXs : false,
 	url : "data/Marbehan.geojson",
@@ -191,41 +191,73 @@ var webmap = {
 	
 	// Set the GeoJSON layer
 	setGeojsonLayer : function () {
+		var geojsonLayer;
+		
 		// Define the source of the data
 	   var geojsonSource = new ol.source.Vector({
          url: webmap.url,
          format: new ol.format.GeoJSON()
       });
       
+     /* // Get features
+      geojsonLayer.once('change', function(){
+         if (geojsonLayer.getState() == 'ready')
+          { var features = geojsonLayer.getFeatures();
+          console.log(features);
+           }
+      });    */ 
+     
+      
       // Define the style
-      var iconStyle = webmap.setStyle()
+     // var iconStyle = webmap.setStyle()
+      
+
+      var styleFunction = function (feature, resolution) {
+      	//console.log(feature)
+      	console.log(feature.values_)
+      		 var name = feature.get('name');
+    	console.log(name);
+      webmap.globalvar=feature;    	
+    	
+    	
+      	var styleGeojson = new ol.style.Style({
+            image: new ol.style.Icon({
+               anchor: [0.5, 46],
+               anchorXUnits: 'fraction',
+               anchorYUnits: 'pixels',
+               opacity: 0.75,
+               src: 'img/bread.png',
+               //src:  feature.get('src'),,
+            })
+            
+         });
+         
+
+         
+         return [styleGeojson]; 
+      };      
+      
       
       // Define the layer      
       var geojsonLayer = new ol.layer.Vector({
          title: 'Carte des Services',
          source: geojsonSource,
-         style: iconStyle
+         //style: iconStyle
+         style: styleFunction
          // un truc du genre: onEach: setStyle();
          // + filter;
       });
        
-      return geojsonLayer;  	
+      return geojsonLayer; 
+      
+     
+      
+      
+      
+       	
 	},
 	 
 	 
-	// Set the style of the geojson layer
-	setStyle : function () {
-	   var styleGeojson = new ol.style.Style({
-         image: new ol.style.Icon({
-            anchor: [0.5, 46],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            opacity: 0.75,
-            src: 'img/car.png'
-         })
-      })
-      return styleGeojson;  	
-	},
 	
 	// Show map panel (jquery)	
    showMapPanel : function () {	
@@ -242,7 +274,7 @@ var webmap = {
 		var osmLayer = new ol.layer.Tile({
 	      source: new ol.source.OSM()
 	   });
-	   //webmap.olmap.addLayer(osmLayer);
+	   webmap.olmap.addLayer(osmLayer);
 	   
 	   // Add POI layer (OpenLayers 3)
       var geojsonLayer = webmap.setGeojsonLayer();
