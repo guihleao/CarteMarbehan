@@ -127,23 +127,37 @@ var webmap = {
 	
    // Test if feature is in category and return corresponding icon file
    mapCategory : function (feature) {
-     var cat, img_file, OSM_key_in_geojson, OSM_value_in_geojson    	
-   	
-     if (feature.properties.amenity != undefined){
-     	  OSM_key_in_geojson = "amenity";    
-        OSM_value_in_geojson = feature.properties.amenity;
-        console.log('amenity') ;   
-     }  
-     if (feature.properties.shop != undefined){
-     	  OSM_key_in_geojson = "shop";    
-        OSM_value_in_geojson = feature.properties.shop;      
-     }     
-     else {
-     	  OSM_key_in_geojson = undefined;    
-        OSM_value_in_geojson = undefined;  
-        //console.log("No exploitable categories ");
-     } 
-     
+      var feature_type, cat, img_file, OSM_key_in_geojson, OSM_value_in_geojson    	
+
+      if (feature.properties.amenity != undefined){
+     	   feature_type = "amenity";      
+      } else {
+         if (feature.properties.shop != undefined){
+     	      feature_type = "shop";         
+         }      
+         else {
+            feature_type = undefined;    
+         } 
+      }
+       
+      switch (feature_type){
+         case "amenity":
+            //console.log('amenity here');
+     	      OSM_key_in_geojson = "amenity";    
+            OSM_value_in_geojson = feature.properties.amenity;
+            break;
+         case "shop":
+            //console.log('shop here');
+            OSM_key_in_geojson = "shop";    
+            OSM_value_in_geojson = feature.properties.shop;
+            break; 
+         default:
+            //console.log('default');
+            OSM_key_in_geojson = undefined;    
+            OSM_value_in_geojson = undefined;
+            break; 
+      }    	
+
      // loop over the category on items.json
      for (i = 0; i < items.length; i++) {
         if (items[i].OSM_key == OSM_key_in_geojson && items[i].OSM_value == OSM_value_in_geojson){
@@ -206,58 +220,88 @@ var webmap = {
           console.log(features);
            }
       });    */ 
-     
-      
-      // Define the style
-     // var iconStyle = webmap.setStyle()
-      
-
-      var styleFunction = function (feature, resolution) {
-      	//console.log(feature)
-      	console.log(feature.values_)
-      		 var name = feature.get('name');
-    	console.log(name);
-      webmap.globalvar=feature;    	
-    	
-    	
-      	var styleGeojson = new ol.style.Style({
-            image: new ol.style.Icon({
-               anchor: [0.5, 46],
-               anchorXUnits: 'fraction',
-               anchorYUnits: 'pixels',
-               opacity: 0.75,
-               src: 'img/bread.png',
-               //src:  feature.get('src'),,
-            })
-            
-         });
-         
-
-         
-         return [styleGeojson]; 
-      };      
-      
       
       // Define the layer      
       var geojsonLayer = new ol.layer.Vector({
          title: 'Carte des Services',
          source: geojsonSource,
          //style: iconStyle
-         style: styleFunction
+         style: webmap.styleFunction
          // un truc du genre: onEach: setStyle();
          // + filter;
       });
        
       return geojsonLayer; 
-      
-     
-      
-      
-      
        	
 	},
 	 
-	 
+	// getIcon function, similar to mapCategory() 
+   getIcon : function (feature) {
+      var feature_type, img_file, OSM_key_in_geojson, OSM_value_in_geojson; 
+
+      if (feature.values_.amenity != undefined){
+     	   feature_type = "amenity";      
+      } else {
+         if (feature.values_.shop != undefined){
+     	      feature_type = "shop";         
+         }      
+         else {
+            feature_type = undefined;    
+         } 
+      }
+
+      switch (feature_type){
+         case "amenity":
+            //console.log('amenity here');
+     	      OSM_key_in_geojson = "amenity";    
+            OSM_value_in_geojson = feature.values_.amenity;
+            break;
+         case "shop":
+            //console.log('shop here');
+            OSM_key_in_geojson = "shop";    
+            OSM_value_in_geojson = feature.values_.shop;
+            break; 
+         default:
+            //console.log('default');
+            OSM_key_in_geojson = undefined;    
+            OSM_value_in_geojson = undefined;
+            break; 
+      }   
+     
+     // loop over the category on items.json
+     for (i = 0; i < items.length; i++) {
+        if (items[i].OSM_key == OSM_key_in_geojson && items[i].OSM_value == OSM_value_in_geojson){
+           img_file = items[i].png_file;
+           break;
+        }
+        else {
+           img_file = "foo";
+        }
+        
+     }         
+     return img_file;
+     
+   },
+	
+	// set the style of the function, meaning the icon of the POIs
+   styleFunction : function (feature, resolution) {
+      var img_src;
+      //var name = feature.get('name');
+    	img_src = 'img/' + webmap.getIcon(feature) + '.png';
+    	
+      var styleGeojson = new ol.style.Style({
+            image: new ol.style.Icon({
+               anchor: [0.5, 46],
+               anchorXUnits: 'fraction',
+               anchorYUnits: 'pixels',
+               opacity: 0.75,
+               src: img_src
+            })
+            
+      });
+      
+      return [styleGeojson]; 
+   },  
 	
 	// Show map panel (jquery)	
    showMapPanel : function () {	
