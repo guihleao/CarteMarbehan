@@ -130,13 +130,29 @@ div#panelContent {
    }
 }
 
-
-.icon_list {
+.poi_icon {
+	float: left;
 	cursor:pointer;
-        margin-right:4px;
+	width: 2em;
+   margin-right: 1em;   
 }
 
-.icon_list:hover {
-        
+.poi_icon:hover {
 	background-color: #EEE7E7;
 }
+
+.poi_content {
+   font-size: 0.85em;
+}
+
+.poi_name{
+   font-weight: bold;
+}
+
+.phone {
+   }
+
+.opening_hours img {
+	width: 1.3em;
+	padding-right: 2px;
+ }

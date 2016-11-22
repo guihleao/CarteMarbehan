@@ -40,29 +40,14 @@ var webmap = {
       if (feature.properties.name != undefined) {poi_name = feature.properties.name} else {poi_name = ""}         
            
       [catItems, img_file] = webmap.mapCategory(feature);
-      	
+      
       if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
-         $("#list").append("<tr><td><img class='icon_list' src='img/" + img_file + ".png' onclick='webmap.selectPoi(" + index + ")'></td><td>" + poi_name + webmap.formatInfo(feature) + "</td></tr>");
+         $("#list").append("<div class='poi_icon'><img onclick='webmap.selectPoi(feature)' src='img/" + img_file + ".png'></div><div class='poi_name'>" + poi_name + "</div>" + webmap.formatInfo(feature));   
       }
+      $(".poi_list").on("click", webmap.selectPoi(feature));
+      
    },
 
-
-   formatInfo : function (feature) {
-      var info_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
-   	
-         if (feature.properties.name != undefined) {poi_name = feature.properties.name} else {poi_name = ""}
-         //if (feature.properties.addr:street != undefined) {poi_addr_street = feature.properties.addr:street} else {poi_addr_street = ""}
-         //if (feature.properties.addr:housenumber != undefined) {poi_addr:housenumber = feature.properties.addr:housenumber} else {poi_addr:housenumber = ""}
-         //if (feature.properties.addr:city != undefined) {poi_addr:city = feature.properties.addr:city} else {poi_addr:city = ""}
-         if (feature.properties.phone != undefined) {poi_phone = feature.properties.phone} else {poi_phone = ""}
-         if (feature.properties.website != undefined) {poi_website = feature.properties.website} else {poi_website = ""}
-         if (feature.properties.opening_hours != undefined) {poi_opening_hours = webmap.formatOpeningHours(feature);} else {poi_opening_hours = ""}
-        
-         info_content = "<div class='info_content'>" + poi_phone + '<br><a target="_blank" href="' + poi_website + '">' + poi_website + '</a><br>' + poi_opening_hours + "</div>";
-        
-         return info_content;
-   }, 
-	
 	// User experience / responsiveness functions (using jquery)
 	// Hide/show panel
 	collapsePanel : function(){
@@ -93,20 +78,112 @@ var webmap = {
 		  }
 	},
 	
-   formatOpeningHours : function (feature){
-      var intro="<i>Heures d'ouverture:</i><br>";
-      var str = feature.properties.opening_hours;
-      str = str.replace("Mo", "Lundi");
-      str = str.replace("Tu", "Mardi");
-      str = str.replace("We", "Mercredi");
-      str = str.replace("Th", "Jeudi");
-      str = str.replace("Fr", "Vendredi");
-      str = str.replace("Sa", "Samedi");
-      str = str.replace("Su", "Dimanche");
-      str = str.replace("24/7", "24h/24h");
+   formatInfo : function (feature) {
+      var info_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
+   	
+   	poi_phone = webmap.formatPhone(feature);
+   	poi_website = webmap.formatWebsite(feature);
+   	poi_opening_hours = webmap.formatOpeningHours(feature);
+    
+      info_content = "<div class='poi_content'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
+        
+      return info_content;
+   }, 	
+	
+   formatPhone : function (feature){
+   	var poi_phone;
+   	var header = "<p class='phone'>";
+      var footer = "</p>"; 
+   	
+   	if (feature.properties.phone != undefined) {
+   		var phone = feature.properties.phone;
+   		poi_phone = header + phone + footer;
+   		} 
+   	else {
+   		poi_phone = "";
+   	}
       
-      return intro + str;
+      return poi_phone;
+   },	
+	
+	formatWebsite : function (feature){
+   	var poi_website;
+   	var header = "<p class='website'>";
+      var footer = "</p>"; 
+   	
+   	if (feature.properties.website != undefined) {
+   		var website = feature.properties.website;
+   		poi_website = header + "<a target='_blank' href='" + website + "'>" + website + '</a>' + footer;
+   		} 
+   	else {
+   		poi_website = "";
+   	}
+      
+      return poi_website;
+   },
+	
+	
+   formatOpeningHours : function (feature){
+   	var poi_opening_hours;
+      var header = "<p class='opening_hours'><img src='img/openinghours.png'>";
+      var footer = "</p>"; 
+      
+      if (feature.properties.opening_hours != undefined) {
+   		var opening_hours = feature.properties.opening_hours;
+   		opening_hours = opening_hours.replace("Mo", "Lundi");
+         opening_hours = opening_hours.replace("Tu", "Mardi");
+         opening_hours = opening_hours.replace("We", "Mercredi");
+         opening_hours = opening_hours.replace("Th", "Jeudi");
+         opening_hours = opening_hours.replace("Fr", "Vendredi");
+         opening_hours = opening_hours.replace("Sa", "Samedi");
+         opening_hours = opening_hours.replace("Su", "Dimanche");
+         opening_hours = opening_hours.replace("24/7", "24h/24h");
+         opening_hours = opening_hours.replace(",", ", ");
+   		poi_opening_hours = header + opening_hours + footer;
+   		} 
+   	else {
+   		poi_opening_hours = ""
+   	}
+          
+      return poi_opening_hours;
       // find something in case of the opening_hours not well formated in OSM
+   },	
+	
+	// getIcon function, similar to mapCategory() 
+   getIcon : function (feature, feature_syntax) {
+      var feature_syntax, img_file, OSM_key_in_geojson, OSM_value_in_geojson; 
+
+      feature_syntax = feature.values_;
+      //feature_syntax = feature.get('values_');
+      //console.log(feature_syntax)
+
+      if (feature_syntax.amenity != undefined){
+     	   OSM_key_in_geojson = "amenity";
+     	   OSM_value_in_geojson = feature_syntax.amenity;    
+      } else {
+         if (feature_syntax.shop != undefined){
+     	      OSM_key_in_geojson = "shop";    
+            OSM_value_in_geojson = feature_syntax.shop;         
+         }      
+         else {
+            OSM_key_in_geojson = undefined;    
+            OSM_value_in_geojson = undefined;    
+         } 
+     }  
+     
+     // loop over the category on items.json
+     for (i = 0; i < items.length; i++) {
+        if (items[i].OSM_key == OSM_key_in_geojson && items[i].OSM_value == OSM_value_in_geojson){
+           img_file = items[i].png_file;
+           break;
+        }
+        else {
+           img_file = "foo";
+        }
+     }  
+     
+     return img_file;
+     
    },	
 	
    // Test if feature is in category and return corresponding icon file
@@ -208,43 +285,17 @@ var webmap = {
       return geojsonLayer; 
        	
 	},
-	 
-	// getIcon function, similar to mapCategory() 
-   getIcon : function (feature, feature_syntax) {
-      var feature_syntax, img_file, OSM_key_in_geojson, OSM_value_in_geojson; 
-
-      feature_syntax = feature.values_;
-      //feature_syntax = feature.get('values_');
-      //console.log(feature_syntax)
-
-      if (feature_syntax.amenity != undefined){
-     	   OSM_key_in_geojson = "amenity";
-     	   OSM_value_in_geojson = feature_syntax.amenity;    
-      } else {
-         if (feature_syntax.shop != undefined){
-     	      OSM_key_in_geojson = "shop";    
-            OSM_value_in_geojson = feature_syntax.shop;         
-         }      
-         else {
-            OSM_key_in_geojson = undefined;    
-            OSM_value_in_geojson = undefined;    
-         } 
-     }  
-     
-     // loop over the category on items.json
-     for (i = 0; i < items.length; i++) {
-        if (items[i].OSM_key == OSM_key_in_geojson && items[i].OSM_value == OSM_value_in_geojson){
-           img_file = items[i].png_file;
-           break;
-        }
-        else {
-           img_file = "foo";
-        }
-     }  
-     
-     return img_file;
-     
-   },
+	
+	
+	// Select POI: show poi_content and highlight the poi on the map
+	selectPoi : function (feature) {
+		console.log(feature);
+		
+		// Show poi_content
+		
+		// Highlight poi on the map
+       	
+	},	
 	
 	// set the style of the function, meaning the icon of the POIs
    styleFunction : function (feature, resolution) {
