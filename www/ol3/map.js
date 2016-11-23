@@ -28,26 +28,42 @@ var webmap = {
 	// FUNCTIONS //   - by alphabetic order, except init()
 	///////////////
 	
-
-  
- 
    // Add points of interests to the list
    add2list: function(index, feature, category) {
-   	//console.log(feature)
-   	// TO DO: delete index if not needed in the OL3 gestion of firing popups. 
-   	var featureName, catItems, imgFile;
+ 
+   	var featureName, catItems, imgFile, pid;
    	
       if (feature.properties.name != undefined) {poi_name = feature.properties.name} else {poi_name = ""}         
            
       [catItems, img_file] = webmap.mapCategory(feature);
-      
+          
       if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
-         $("#list").append("<div class='poi_icon'><img onclick='webmap.selectPoi(feature)' src='img/" + img_file + ".png'></div><div class='poi_name'>" + poi_name + "</div>" + webmap.formatInfo(feature));   
+         poi_content = webmap.formatInfo(feature, index);
+
+         $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'>" + poi_name + "</div>" + poi_content + "</div>");
+         
+         // hide poi_content for each element
+         $('#pid_' + index).hide()
+
       }
-      $(".poi_list").on("click", webmap.selectPoi(feature));
-      
+ 
    },
 
+	// Select POI: show poi_content and highlight the poi on the map
+	selectPoi : function (index) {
+
+		// Show poi_content
+		var ishidden = $('#pid_' + index).is(':hidden');
+		if(ishidden) {
+         $('#pid_' + index).show() 
+      }
+      else{
+      	$('#pid_' + index).hide()
+      }
+		
+		// Highlight poi on the map
+       	
+	},	
 	// User experience / responsiveness functions (using jquery)
 	// Hide/show panel
 	collapsePanel : function(){
@@ -78,16 +94,16 @@ var webmap = {
 		  }
 	},
 	
-   formatInfo : function (feature) {
-      var info_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
+   formatInfo : function (feature, index) {
+      var poi_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
    	
    	poi_phone = webmap.formatPhone(feature);
    	poi_website = webmap.formatWebsite(feature);
    	poi_opening_hours = webmap.formatOpeningHours(feature);
     
-      info_content = "<div class='poi_content'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
+      poi_content = "<div class='poi_content' id='pid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
         
-      return info_content;
+      return poi_content;
    }, 	
 	
    formatPhone : function (feature){
@@ -228,30 +244,32 @@ var webmap = {
       
          // Construct list
          // Display data in a table inside the <div> #list
-         $("#list").append("<table>");      
-      
+         $("#list").append("<div>");      
+         
          // Note: Move the elements to change the order of display
-         $("#list").append("<tr><td colspan=2><h2>Horeca</h2></td></tr>");
+         $("#list").append("<div><h2>Horeca</h2></div>");
          
          $.each(data.features, function(i, f, cat) { 
             webmap.add2list(i,f,"horeca");
          });
        
-         $("#list").append("<tr><td colspan=2><h2>Commerces</h2></td></tr>");
+         $("#list").append("<div><h2>Commerces</h2></div>");
          
          $.each(data.features, function(i, f, cat) { 
             webmap.add2list(i,f,"commerces");
          });
          
-         $("#list").append("<tr><td colspan=2><h2>Services</h2></td></tr>");
+         $("#list").append("<div><h2>Services</h2><div>");
          
          $.each(data.features, function(i, f, cat) { 
             webmap.add2list(i,f,"services");
          });
          // End of the list
-         $("#list").append("</table>");
+         $("#list").append("</div>");
       
       });
+      
+
    },	
 	
 	// Set the GeoJSON layer
@@ -286,17 +304,6 @@ var webmap = {
        	
 	},
 	
-	
-	// Select POI: show poi_content and highlight the poi on the map
-	selectPoi : function (feature) {
-		console.log(feature);
-		
-		// Show poi_content
-		
-		// Highlight poi on the map
-       	
-	},	
-	
 	// set the style of the function, meaning the icon of the POIs
    styleFunction : function (feature, resolution) {
       var img_src;
@@ -321,11 +328,11 @@ var webmap = {
    showMapPanel : function () {	
 		$('#map').show();
    },	 
-	 
+   
 	// init function: perform this at the opening of the page (using jquery & OpenLayers 3)
 	init : function () {
 
-	    // hide the graph panel		
+	   // show the map panel		
 		webmap.showMapPanel();
 		
 		// Add a OSM layer as background (using OpenLayers 3)
@@ -344,6 +351,7 @@ var webmap = {
       
       // Populate the list
       webmap.populateList(webmap.url);
+      
 	}	 
 
 }; // end of webmap object. 
