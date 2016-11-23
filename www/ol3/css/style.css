@@ -130,11 +130,15 @@ div#panelContent {
    }
 }
 
+.poi{
+	
+}
+
 .poi_icon {
 	float: left;
 	cursor:pointer;
-	width: 2em;
-   margin-right: 1em;   
+	height: 2em;
+   margin-right: 0.4em;   
 }
 
 .poi_icon:hover {
@@ -143,10 +147,15 @@ div#panelContent {
 
 .poi_content {
    font-size: 0.85em;
+   padding-left: 3.1em;
+   padding-bottom: 0.6em;
 }
 
 .poi_name{
    font-weight: bold;
+   padding-bottom: 1em;
+   padding-top: 0.5em;
+   /* center text horizontally*/
 }
 
 .phone {
@@ -155,4 +164,8 @@ div#panelContent {
 .opening_hours img {
 	width: 1.3em;
 	padding-right: 2px;
+ }
+ 
+ #test{
+ 	cursor:pointer;
  }
