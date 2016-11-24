@@ -40,7 +40,7 @@ var webmap = {
       if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
          poi_content = webmap.formatInfo(feature, index);
 
-         $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'>" + poi_name + "</div>" + poi_content + "</div>");
+         $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "')\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
          // hide poi_content for each element
          $('#pid_' + index).hide()
@@ -247,19 +247,19 @@ var webmap = {
          $("#list").append("<div>");      
          
          // Note: Move the elements to change the order of display
-         $("#list").append("<div><h2>Horeca</h2></div>");
+         $("#list").append("<div class='poi_title' id='first_poi_title'>Horeca</div>");
          
          $.each(data.features, function(i, f, cat) { 
             webmap.add2list(i,f,"horeca");
          });
        
-         $("#list").append("<div><h2>Commerces</h2></div>");
+         $("#list").append("<div class='poi_title'>Commerces</div>");
          
          $.each(data.features, function(i, f, cat) { 
             webmap.add2list(i,f,"commerces");
          });
          
-         $("#list").append("<div><h2>Services</h2><div>");
+         $("#list").append("<div class='poi_title'>Services<div>");
          
          $.each(data.features, function(i, f, cat) { 
             webmap.add2list(i,f,"services");

@@ -104,6 +104,10 @@ div#panelContent {
   transition: opacity 0.6s;
 }
   
+div#list h2:first-child{
+
+}  
+  
 @media all and (max-width: 768px) {
   div#panel {
   	 width: 0px;
@@ -155,15 +159,33 @@ div#panelContent {
    font-weight: bold;
    padding-bottom: 1em;
    padding-top: 0.5em;
+
    /* center text horizontally*/
+}
+
+.poi_name a{
+	text-decoration: none;
+	cursor: pointer;
+	color: inherit;
+}
+
+.poi_title{
+   font-weight: bold;
+   font-size: 1.5em;
+   padding-bottom: 0.5em;
+   padding-top: 1.2em;
+}
+
+div#first_poi_title{
+   padding-top: 0em;
 }
 
 .phone {
    }
 
 .opening_hours img {
-	width: 1.3em;
-	padding-right: 2px;
+   height: 1.2em;
+   padding-right: 0.3em;
  }
  
  #test{
