@@ -1,0 +1,192 @@
+/* body */
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  padding-top: 50px;   /* the size of the padding-top need to be the one of the navbar */
+}
+
+/* Main containers */
+.header{
+   -webkit-box-shadow: 0 5px 15px rgba(1,1,1,.7);  /* makes a grey shadow below the navbar */
+   box-shadow: 0 5px 15px rgba(1,1,1,.7); 
+}
+
+.bodyContainer {
+	height:100%;
+	width: auto;  /* need to overwrite the width set by bootstrap */
+}
+
+.mapContainer {
+  height: 100%; 
+}
+
+
+/* navbar custom properties */
+.navbar-nav>li, .navbar-nav {
+  float: left !important;       /* to remove the default behavior of bootstrap of setting the menu in two lines in mobile view */
+}
+
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 4px;
+}
+
+@media all and (max-width: 768px) {
+	.navbar-nav {
+     margin-top: 5px;
+     margin-bottom: -5px;
+   }
+}
+
+.navbar-right {
+  float: right !important;   /* to correct the float:left !important set in the navbar-nav>li above */
+}
+
+.nav-icon {
+  height: 20px;
+}
+
+/* Main panels */
+
+div#map {
+  height: 100%;         /* to specify the full height for the map, works only if height is set in body and parent divs */ 
+  background-color: #b5d0d0; 
+  padding-right: 0px;   /* need to overwrite the padding-right and padding-left set by bootstrap */
+  padding-left: 0px;
+}
+
+div#panel {
+  position: absolute;
+  top: 50px;
+  padding-top: 8px;          /* needed to move the content below the gray shadow specified in the header */
+  height: calc(100% - 50px); /* calc is used to substract the height of the navbar */
+  width: 300px;
+  background-color: #fafafa;
+  opacity: 0.92;
+  -webkit-transition: width 0.6s;
+  transition: width 0.6s;
+  z-index: 1000;
+}
+
+div#collapseBtnXs{
+   position: absolute;
+   bottom: 10px;
+   left: 10px;
+   z-index:1001;
+}
+
+div#collapseBtnXs button {
+  font-weight: bold;
+}
+
+div#collapseBtn {
+  float:right;
+  margin-top: 3px;
+  margin-right: 3px;
+  font-weight: bold;
+}
+
+div#collapseBtn button {
+  font-weight: bold;
+}
+
+div#panelContent {
+  opacity: 1;
+  height: inherit;   /* better than height: 100% */
+  width: 100%;
+  overflow: auto;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
+}
+  
+div#list h2:first-child{
+
+}  
+  
+@media all and (max-width: 768px) {
+  div#panel {
+  	 width: 0px;
+  	 }
+  div#panelContent{
+  	 opacity: 0;
+  }
+}
+
+/* OpenLayers controls */
+
+.leaflet-control-container {
+   position: absolute;
+   right: 42px;     
+}
+
+@media all and (max-width: 768px) {
+  .ol-zoom {
+     top: initial;   /* needed to clear the top property specified by OpenLayers */
+     right: 8px;
+     bottom: 6px;
+     left: auto;   /* needed to avoid the background-color of the ol zoom control spanning from the left side of the screen */
+   }
+}
+
+.poi{
+	
+}
+
+.poi_icon {
+	float: left;
+	cursor:pointer;
+	height: 2em;
+   margin-right: 0.4em;   
+}
+
+.poi_icon:hover {
+	background-color: #EEE7E7;
+}
+
+.poi_content {
+   font-size: 0.85em;
+   padding-left: 3.1em;
+   padding-bottom: 0.6em;
+}
+
+.poi_name{
+   font-weight: bold;
+   padding-bottom: 1em;
+   padding-top: 0.5em;
+
+   /* center text horizontally*/
+}
+
+.poi_name a{
+	text-decoration: none;
+	cursor: pointer;
+	color: inherit;
+}
+
+.poi_title{
+   font-weight: bold;
+   font-size: 1.5em;
+   padding-bottom: 0.5em;
+   padding-top: 1.2em;
+}
+
+div#first_poi_title{
+   padding-top: 0em;
+}
+
+.phone {
+   }
+
+.opening_hours img {
+   height: 1.2em;
+   padding-right: 0.3em;
+ }
+ 
+ #test{
+ 	cursor:pointer;
+ }
