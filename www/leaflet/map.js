@@ -6,17 +6,18 @@ var webmap = {
 	// VARIABLES //
 	///////////////
 	markerList : [],
+	DATA : [],
 	showPanel : true,
 	showPanelXs : false,
 	markerLayer: null,	
-	url : "data/Marbehan.geojson",
+	url : "data/Habay_06122016.geojson",
 
 	/////////////
 	// OBJECTS //
 	/////////////
 	
 	// Map creation (using LeafletJS)
-	Lmap : L.map('map').setView([49.73, 5.54], 13),
+	Lmap : L.map('map').setView([49.73, 5.58], 12),
 		
 	///////////////
 	// FUNCTIONS //   - by alphabetic order, except init()
@@ -25,46 +26,27 @@ var webmap = {
    // Add points of interests to the list
    add2list: function(index, feature, category) {
  
-   	var featureName, catItems, imgFile;
+   	var poi_name, poi_content, catItems, imgFile;
    	
-      if (feature.properties.name != undefined) {poi_name = feature.properties.name} else {poi_name = ""}         
-           
-      [catItems, imgFile] = webmap.mapCategory(feature);
+      if (feature.properties.name != undefined) {
+      	poi_name = feature.properties.name;
+        
+         [catItems, imgFile] = webmap.mapCategory(feature);
           
-      if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
-         poi_content = webmap.formatInfo(feature, index);
-
-         $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+         if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
+            poi_content = webmap.formatInfo(feature, index);
+            
+            if (poi_content != null) { // TO DO: condition if poi_content no containing information
+               $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
-         // hide poi_content for each element
-         $('#pid_' + index).hide()
-
-      }
- 
+               // hide poi_content for each element
+               $('#pid_' + index).hide()
+            }
+         }
+      } else {poi_name = ""}         
+           
    },
 
-	// Select POI: show poi_content and highlight the poi on the map
-	selectPoi : function (index) {
-      console.log(index)
-		// Show poi_content
-		var ishidden = $('#pid_' + index).is(':hidden');
-		if(ishidden) {
-         $('#pid_' + index).show() 
-      }
-      else{
-      	$('#pid_' + index).hide()
-      }
-	
-      // show popup
-      //webmap.Lmap.layers_....
-      webmap.markerList[index].openPopup();
-		
-		// Highlight poi on the map
-		
-       	
-	},	
-	
-		
 	// User experience / responsiveness functions (using jquery)
 	// Hide/show panel
 	collapsePanel : function(){
@@ -139,7 +121,6 @@ var webmap = {
       return poi_website;
    },
 	
-	
    formatOpeningHours : function (feature){
    	var poi_opening_hours;
       var header = "<p class='opening_hours'><img src='img/openinghours.png'>";
@@ -192,7 +173,7 @@ var webmap = {
            break;
         }
         else {
-           img_file = "foo";
+           img_file = "conveniencestore";
         }
      }         
         
@@ -234,12 +215,42 @@ var webmap = {
      
    },	
 	
+   // get data
+   getData : function (url) {	
+	   $.getJSON(url, function(data) {
+	   	$.each(data.features, function(i, f) { 
+            webmap.DATA.push(f);
+         });
+	   })
+   },
+	
+	// Select POI: show poi_content and highlight the poi on the map
+	selectPoi : function (index) {
+      console.log(index)
+		// Show poi_content
+		var ishidden = $('#pid_' + index).is(':hidden');
+		if(ishidden) {
+         $('#pid_' + index).show();
+      }
+      else{
+      	$('#pid_' + index).hide();
+      }
+	
+      // show popup
+      //webmap.Lmap.layers_....
+      webmap.markerList[index].openPopup();
+		
+		// Highlight poi on the map
+		
+       	
+	},		
+	
 	// Set the GeoJSON layer
 	setGeojsonLayer : function () {
       var geojsonLayer;
            // Get data
       //$.getJSON(webmap.url, function(data) {
-
+      var cpt= 1
       //console.log(data);
 		//geojsonLayer = L.geoJson(data, {
 		geojsonLayer = L.geoJson(geojson, {	
@@ -249,6 +260,8 @@ var webmap = {
 	            	});
             },
         onEachFeature: function (feature, layer) {
+        	    console.log(cpt);
+        	    cpt++;
 			    layer.bindPopup(webmap.makePopupContent(feature));
 			    webmap.markerList.push(webmap.markerLayer);
 	        }
@@ -256,9 +269,10 @@ var webmap = {
 	      //      return feature.properties.type == 'gac';
 		   // }	        
       });
-      //})
+      
+    //})
 		
-		return geojsonLayer;
+	return geojsonLayer;
        	
 	},
 	
@@ -275,9 +289,9 @@ var webmap = {
       
       var iconPOI = new L.Icon({
       	iconUrl: img_src,
-      	iconAnchor: [0, 0],
+      	iconAnchor: [16, 6],
       	popupAnchor: [0, 0],
-      	iconSize: [30, 30]
+      	iconSize: [32, 37]
       });
       
       return iconPOI; 
@@ -295,10 +309,21 @@ var webmap = {
 		webmap.showMapPanel();
 		
 		// Add a background layer (LeafletJS)
-      var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      var baseLayer = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
+	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	      subdomains: 'abcd',
+	      minZoom: 0,
+	      maxZoom: 20,
+	      ext: 'png'
+      });		
+
+      /*var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      });
-	   webmap.Lmap.addLayer(osm);
+      });*/
+	   webmap.Lmap.addLayer(baseLayer);
+	   
+      // Load geojson data - don't work because of asynchroneousity
+      webmap.getData(webmap.url);	   
 	   
 	   // Add POI layer (LeafletJS)
       var geojsonLayer = webmap.setGeojsonLayer();
@@ -307,6 +332,7 @@ var webmap = {
       // Populate the list
       webmap.populateList(webmap.url);
       
+
 	}	 
 
 }; // end of webmap object. 
