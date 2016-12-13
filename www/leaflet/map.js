@@ -34,16 +34,16 @@ var webmap = {
          [catItems, imgFile] = webmap.mapCategory(feature);
           
          if (catItems === category) { // TO DO: add here a condition to see if the feature is on the current view 
+            // Retrieve information for poi_content
             poi_content = webmap.formatInfo(feature, index);
             
-            if (poi_content != null) { // TO DO: condition if poi_content no containing information
-               $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+            // Build the item of the list
+            $("#list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
-               // hide poi_content for each element
-               $('#pid_' + index).hide()
-            }
+            // Hide poi_content for each element
+            $('#pid_' + index).hide()           
          }
-      } else {poi_name = ""}         
+      }         
            
    },
 
@@ -66,15 +66,15 @@ var webmap = {
 	
 	collapsePanelXs : function(){
 		if(webmap.showPanelXs === true){
-		  $('div#panel').css('width','0px');
-		  $('div#panelContent').css('opacity','0' );
-		  webmap.showPanelXs =! webmap.showPanelXs;
-		  }
+		   $('div#panel').css('width','0px');
+		   $('div#panelContent').css('opacity','0' );
+		   webmap.showPanelXs =! webmap.showPanelXs;
+	   }
 	   else{
-	     $('div#panel').css('width','calc(100% - 45px)');
-	     $('div#panelContent').css('opacity','1');
-		  webmap.showPanelXs =! webmap.showPanelXs;
-		  }
+	      $('div#panel').css('width','calc(100% - 45px)');
+	      $('div#panelContent').css('opacity','1');
+		   webmap.showPanelXs =! webmap.showPanelXs;
+		}
 	},
 	
    formatInfo : function (feature, index) {
@@ -83,9 +83,15 @@ var webmap = {
    	poi_phone = webmap.formatPhone(feature);
    	poi_website = webmap.formatWebsite(feature);
    	poi_opening_hours = webmap.formatOpeningHours(feature);
-    
-      poi_content = "<div class='poi_content' id='pid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
-        
+      
+      // Add a condition to remove useless div poi_content in case of no content
+      if (poi_phone != "" || poi_website != "" || poi_opening_hours != "" ) {
+         poi_content = "<div class='poi_content' id='pid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
+      }
+      else{
+         poi_content = "";
+      }
+      
       return poi_content;
    }, 	
 	
@@ -106,6 +112,7 @@ var webmap = {
    },	
 	
 	formatWebsite : function (feature){
+		// TO DO: string formatting: remove unuseful http and https
    	var poi_website;
    	var header = "<p class='website'>";
       var footer = "</p>"; 
@@ -126,8 +133,8 @@ var webmap = {
       var header = "<p class='opening_hours'><img src='img/openinghours.png'>";
       var footer = "</p>"; 
       
-      if (feature.properties.opening_hours != undefined) {
-   		var opening_hours = feature.properties.opening_hours;
+      if (feature.properties.opening_ho != undefined) {
+   		var opening_hours = feature.properties.opening_ho;
    		opening_hours = opening_hours.replace("Mo", "Lundi");
          opening_hours = opening_hours.replace("Tu", "Mardi");
          opening_hours = opening_hours.replace("We", "Mercredi");
@@ -140,7 +147,7 @@ var webmap = {
    		poi_opening_hours = header + opening_hours + footer;
    		} 
    	else {
-   		poi_opening_hours = ""
+   		poi_opening_hours = "";
    	}
           
       return poi_opening_hours;
@@ -260,7 +267,7 @@ var webmap = {
 	            	});
             },
         onEachFeature: function (feature, layer) {
-        	    console.log(cpt);
+        	    //console.log(cpt);
         	    cpt++;
 			    layer.bindPopup(webmap.makePopupContent(feature));
 			    webmap.markerList.push(webmap.markerLayer);
