@@ -243,13 +243,25 @@ var webmap = {
       	$('#pid_' + index).hide();
       }
 	
-      // show popup
-      //webmap.Lmap.layers_....
-      webmap.markerList[index].openPopup();
-		
-		// Highlight poi on the map
-		
-       	
+      // highlight icon and/or show popup
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      	// Highlight poi on the map
+      	var selected_icon = webmap.markerList[index].options.icon;
+         selected_icon.options.iconSize = [36,51]
+         webmap.markerList[index].setIcon(selected_icon)
+      }
+      else{
+      	// Open popups from the list
+         webmap.markerList[index].openPopup();
+         
+         // Highlight poi on the map
+         //webmap.markerList[index].setIcon(webmap.iconPOIselected);
+         var selected_icon = webmap.markerList[index].options.icon;
+         selected_icon.options.iconSize = [42,47]
+         webmap.markerList[index].setIcon(selected_icon)
+         
+      }
+      	
 	},		
 	
 	// Set the GeoJSON layer
