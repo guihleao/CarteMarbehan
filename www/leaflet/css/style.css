@@ -80,6 +80,11 @@ div#collapseBtnXs{
    z-index:1001;
 }
 
+div#collapseBtnXs img{
+   width: 20px;
+   height: 22px;
+}
+
 div#collapseBtnXs button {
   font-weight: bold;
 }
@@ -187,6 +192,3 @@ div#first_poi_title{
    padding-right: 0.3em;
  }
  
-.no_padding {
-   padding-bottom: 0;
-}

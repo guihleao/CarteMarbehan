@@ -245,24 +245,39 @@ var webmap = {
 	
       // highlight icon and/or show popup
       if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      	// Highlight poi on the map
-      	var selected_icon = webmap.markerList[index].options.icon;
-         selected_icon.options.iconSize = [36,51]
-         webmap.markerList[index].setIcon(selected_icon)
+         // Highlight poi on the map
+         webmap.highlightPoi(index); 
       }
       else{
       	// Open popups from the list
          webmap.markerList[index].openPopup();
          
          // Highlight poi on the map
-         //webmap.markerList[index].setIcon(webmap.iconPOIselected);
-         var selected_icon = webmap.markerList[index].options.icon;
-         selected_icon.options.iconSize = [42,47]
-         webmap.markerList[index].setIcon(selected_icon)
-         
+         webmap.highlightPoi(index); 
       }
       	
 	},		
+	
+	highlightPoi : function (index) { 
+	   webmap.unhighlightPoi();
+	 
+	   console.log('highlight poi');
+	   var selected_icon = webmap.markerList[index].options.icon;
+      selected_icon.options.iconSize = [42,47]
+      webmap.markerList[index].setIcon(selected_icon)
+	},
+	
+   // Un-highlight poi on the map
+   // on certains conditions, 	unselected_icon.options.iconSize = [32,37]; webmap.markerList[index].setIcon(unselected_icon)
+	// conditions are: single click but no single click on POI icon, other popup fire,  
+   unhighlightPoi : function () {   
+     console.log('unhighlight poi');
+     for (var i = 0; i < webmap.markerList.length; i++) {
+        var unselected_icon = webmap.markerList[i].options.icon;
+        unselected_icon.options.iconSize = [32,37]
+        webmap.markerList[i].setIcon(unselected_icon)
+     }
+   },	
 	
 	// Set the GeoJSON layer
 	setGeojsonLayer : function () {
@@ -351,7 +366,9 @@ var webmap = {
       // Populate the list
       webmap.populateList(webmap.url);
       
-
+      // unhighlight POIs
+      //$('#list').on('click', function () {webmap.unhighlightPoi();});
+      webmap.Lmap.on('click', function () {webmap.unhighlightPoi();}); // seems not acting on popups so good. No unhighlight but no highlight too...
 	}	 
 
 }; // end of webmap object. 
