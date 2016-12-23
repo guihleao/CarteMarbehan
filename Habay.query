@@ -9,12 +9,68 @@ The original search was:
 // gather results
 (
   // query part for: “shop”
-  node["shop"](area.searchArea);
-  way["shop"](area.searchArea);
-  node["amenity"](area.searchArea);
-  way["amenity"](area.searchArea);
+  node['amenity'='bar'](area.searchArea);
+  way['amenity'='bar'](area.searchArea);
+  node['amenity'='biergarten'](area.searchArea);
+  way['amenity'='biergarten'](area.searchArea);
+  node['amenity'='cafe'](area.searchArea);
+  way['amenity'='cafe'](area.searchArea);
+  node['amenity'='fast_food'](area.searchArea);
+  way['amenity'='fast_food'](area.searchArea);
+  node['amenity'='kindergarten'](area.searchArea);
+  way['amenity'='kindergarten'](area.searchArea);
+  node['amenity'='pharmacy'](area.searchArea);
+  way['amenity'='pharmacy'](area.searchArea);
+  node['amenity'='pub'](area.searchArea);
+  way['amenity'='pub'](area.searchArea);
+  node['amenity'='restaurant'](area.searchArea);
+  way['amenity'='restaurant'](area.searchArea);
+  node['amenity'='school'](area.searchArea);
+  way['amenity'='school'](area.searchArea);
+  node['amenity'='ice_cream'](area.searchArea);
+  way['amenity'='ice_cream'](area.searchArea);
+  node['amenity'='college'](area.searchArea);
+  way['amenity'='college'](area.searchArea);
+  node['amenity'='library'](area.searchArea);
+  way['amenity'='library'](area.searchArea);
+  node['amenity'='university'](area.searchArea);
+  way['amenity'='university'](area.searchArea);
+  node['amenity'='car_wash'](area.searchArea);
+  way['amenity'='car_wash'](area.searchArea);
+  node['amenity'='fuel'](area.searchArea);
+  way['amenity'='fuel'](area.searchArea);
+  node['amenity'='atm'](area.searchArea);
+  way['amenity'='atm'](area.searchArea);
+  node['amenity'='bank'](area.searchArea);
+  way['amenity'='bank'](area.searchArea);
+  node['amenity'='dentist'](area.searchArea);
+  way['amenity'='dentist'](area.searchArea);
+  node['amenity'='doctors'](area.searchArea);
+  way['amenity'='doctors'](area.searchArea);
+  node['amenity'='hospital'](area.searchArea);
+  way['amenity'='hospital'](area.searchArea);
+  node['amenity'='veterinary'](area.searchArea);
+  way['amenity'='veterinary'](area.searchArea);
+  node['amenity'='cinema'](area.searchArea);
+  way['amenity'='cinema'](area.searchArea);
+  node['recycling_type'='centre'](area.searchArea);
+  way['recycling_type'='centre'](area.searchArea);
+  node['shop'='bakery'](area.searchArea);
+  way['shop'='bakery'](area.searchArea);
+  node['shop'='butcher'](area.searchArea);
+  way['shop'='butcher'](area.searchArea);
+  node['shop'='car'](area.searchArea);
+  way['shop'='car'](area.searchArea);
+  node['shop'='doityourself'](area.searchArea);
+  way['shop'='doityourself'](area.searchArea);
+  node['shop'='optician'](area.searchArea);
+  way['shop'='optician'](area.searchArea);
+  node['shop'='supermarket'](area.searchArea);
+  way['shop'='supermarket'](area.searchArea);
 );
 // print results -  center add a centroid for polygons. 
 out center body;
 >;
 out skel qt;
+
+ 
