@@ -10,7 +10,7 @@ var webmap = {
 	showPanel : true,
 	showPanelXs : false,
 	markerLayer: null,	
-	url : "data/Habay_06122016.geojson",
+	url : "data/Habay_29122016.geojson",
 
 	/////////////
 	// OBJECTS //
@@ -30,6 +30,15 @@ var webmap = {
    	
       if (feature.properties.name != undefined) {
       	poi_name = feature.properties.name;
+      	
+      	if (feature.properties.amenity === 'school') { 
+      	   if (feature.properties.addr_city != undefined) { 
+      	      poi_name = poi_name + ' (' + feature.properties.addr_city + ')'
+      	   }
+      	   else {
+      	   	console.log('No city name for school')
+      	   }
+      	}
         
          [catItems, imgFile] = webmap.mapCategory(feature);
           
@@ -222,15 +231,6 @@ var webmap = {
      
    },	
 	
-   // get data
-   getData : function (url) {	
-	   $.getJSON(url, function(data) {
-	   	$.each(data.features, function(i, f) { 
-            webmap.DATA.push(f);
-         });
-	   })
-   },
-	
 	// Select POI: show poi_content and highlight the poi on the map
 	selectPoi : function (index) {
       console.log(index)
@@ -282,11 +282,6 @@ var webmap = {
 	// Set the GeoJSON layer
 	setGeojsonLayer : function () {
       var geojsonLayer;
-           // Get data
-      //$.getJSON(webmap.url, function(data) {
-      var cpt= 1
-      //console.log(data);
-		//geojsonLayer = L.geoJson(data, {
 		geojsonLayer = L.geoJson(geojson, {	
         pointToLayer: function(feature, latlng) {
                return webmap.markerLayer = L.marker(latlng, {
@@ -294,20 +289,11 @@ var webmap = {
 	            	});
             },
         onEachFeature: function (feature, layer) {
-        	    //console.log(cpt);
-        	    cpt++;
 			    layer.bindPopup(webmap.makePopupContent(feature));
 			    webmap.markerList.push(webmap.markerLayer);
-	        }
-		//filter: function(feature, layer) {
-	      //      return feature.properties.type == 'gac';
-		   // }	        
-      });
-      
-    //})
-		
-	return geojsonLayer;
-       	
+	        }	        
+      });		
+	   return geojsonLayer;    	
 	},
 	
 	// display popup
@@ -354,10 +340,7 @@ var webmap = {
       /*var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       });*/
-	   webmap.Lmap.addLayer(baseLayer);
-	   
-      // Load geojson data - don't work because of asynchroneousity
-      webmap.getData(webmap.url);	   
+	   webmap.Lmap.addLayer(baseLayer);  
 	   
 	   // Add POI layer (LeafletJS)
       var geojsonLayer = webmap.setGeojsonLayer();

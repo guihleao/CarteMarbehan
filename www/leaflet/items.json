@@ -1,74 +1,176 @@
 items = [
-  {
-    "OSM_key": "shop",
-    "OSM_value": "bakery",
-    "png_file": "bread",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "shop",
-    "OSM_value": "butcher",
-    "png_file": "butcher-2",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "shop",
-    "OSM_value": "car",
-    "png_file": "car",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "shop",
-    "OSM_value": "optician",
-    "png_file": "glasses",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "shop",
-    "OSM_value": "supermarket",
-    "png_file": "supermarket",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "shop",
-    "OSM_value": "doityourself",
-    "png_file": "tools",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "amenity",
-    "OSM_value": "fast_food",
-    "png_file": "restaurant",
-    "category": "horeca"
-  },
-  {
-    "OSM_key": "amenity",
-    "OSM_value": "pharmacy",
-    "png_file": "drugstore",
-    "category": "commerces"
-  },
-  {
-    "OSM_key": "amenity",
-    "OSM_value": "pub",
-    "png_file": "bar",
-    "category": "horeca"
-  },
-  {
-    "OSM_key": "amenity",
-    "OSM_value": "restaurant",
-    "png_file": "restaurant",
-    "category": "horeca"
-  },
-  {
-    "OSM_key": "amenity",
-    "OSM_value": "school",
-    "png_file": "school",
-    "category": "services"
-  },
-  {
-    "OSM_key": "amenity",
-    "OSM_value": "kindergarten",
-    "png_file": "daycare",
-    "category": "services"
-  }
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "bar",
+   "png_file": "bar",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "biergarten",
+   "png_file": "bar",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "cafe",
+   "png_file": "bar",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "fast_food",
+   "png_file": "restaurant",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "kindergarten",
+   "png_file": "daycare",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "pharmacy",
+   "png_file": "drugstore",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "pub",
+   "png_file": "bar",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "restaurant",
+   "png_file": "restaurant",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "school",
+   "png_file": "school",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "ice_cream",
+   "png_file": "icecream",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "college",
+   "png_file": "school",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "library",
+   "png_file": "library",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "university",
+   "png_file": "school",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "car_wash",
+   "png_file": "car",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "fuel",
+   "png_file": "fillingstation",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "atm",
+   "png_file": "market",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "bank",
+   "png_file": "market",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "dentist",
+   "png_file": "dentist",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "doctors",
+   "png_file": "",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "hospital",
+   "png_file": "",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "veterinary",
+   "png_file": "",
+   "category": "services"
+ },
+ {
+   "OSM_key": "recycling_type",
+   "OSM_value": "centre",
+   "png_file": "",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
+   "OSM_value": "cinema",
+   "png_file": "movierental",
+   "category": "services"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "bakery",
+   "png_file": "bread",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "butcher",
+   "png_file": "butcher-2",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "car",
+   "png_file": "car",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "doityourself",
+   "png_file": "tools",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "optician",
+   "png_file": "glasses",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "supermarket",
+   "png_file": "supermarket",
+   "category": "commerces"
+ }
 ]
