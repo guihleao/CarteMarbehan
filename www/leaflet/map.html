@@ -43,13 +43,16 @@
       <div class="container-fluid" id="panelContent"> 
 
    
-       <div id="list"></div>  
+        <div id="list">    
+          <div class='poi_title' id='first_poi_title'>Horeca</div><div id='first_poi_list'></div>
+          <div class='poi_title' id='second_poi_title'>Commerces</div><div id='second_poi_list'></div>
+          <div class='poi_title' id='third_poi_title'>Services</div><div id='third_poi_list'></div>
+        </div>
       </div>
     </div>
     
     <!-- map -->
     <div class="col-xs-12" id="map" ></div> 
-    <div id="popup"></div> 
     
    </div>
   </div>
@@ -59,7 +62,6 @@
   <script type="text/javascript" src="lib/jquery-ui-1.12.0/jquery-ui.js"></script>
   <script type="text/javascript" src="lib/leaflet/leaflet.js"></script> 
   <script type="text/javascript" src="items.json"></script>
-  <script type="text/javascript" src="data/Habay_29122016.geojson.js"></script>
   <script type="text/javascript" src="map.js"></script>
 
  </body>  

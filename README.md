@@ -32,16 +32,14 @@ The file items.json is generated from the first page ods file osm_tags_filter.od
 
 ## TO DO
 
-* Merge the two ways of loading the geoJSON 
-* Sort data (eg polygons) in the treatment of the geoJSON
-* Filter what is displayed on the map (eg no name elements...)
 * Popups and highlight icons...
 * Think about icons
 * Attributions of icons
-* Sort POI in the list
-* Name of the school & banks not explicit enough: add city names
-* Make a sequence diagram for JS functions
+* Sort POI in the list, with  webmap.geojsonPOI
+* another base map
 
 Further:
 
 * Script for analysing OSM data
+* Make a sequence diagram for JS functions
+* Find smart ways of handling opening hours data...
