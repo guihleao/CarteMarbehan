@@ -5,12 +5,12 @@ var webmap = {
    ///////////////
 	// VARIABLES //
 	///////////////
+	
+	geojsonPOI: [],
+	markerLayer: null,	
 	markerList : [],
-	DATA : [],
 	showPanel : true,
 	showPanelXs : false,
-	markerLayer: null,	
-	geojsonPOI: [],
 	url : "data/Habay_29122016.geojson",
 
 	/////////////
@@ -42,33 +42,33 @@ var webmap = {
       }
         
       // Retrieve information for poi_content
-      poi_content = webmap.formatInfo(feature, index);
+      poi_content = webmap.formatInfo(index, feature);
          
       [catItems, imgFile] = webmap.mapCategory(feature);
           
       if (catItems === 'horeca') { // TO DO: add here a condition to see if the feature is on the current view 
             
          // Build the item of the list
-         $("#first_poi_list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+         $("#first_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
          // Hide poi_content for each element
-         $('#pid_' + index).hide()           
+         $('#pcid_' + index).hide()           
       } else {
          if (catItems === 'commerces') { // TO DO: add here a condition to see if the feature is on the current view 
             
             // Build the item of the list
-            $("#second_poi_list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+            $("#second_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
             // Hide poi_content for each element
-            $('#pid_' + index).hide() 
+            $('#pcid_' + index).hide() 
          } else {
             if (catItems === 'services') { // TO DO: add here a condition to see if the feature is on the current view 
             
                // Build the item of the list
-               $("#third_poi_list").append("<div class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+               $("#third_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
                // Hide poi_content for each element
-               $('#pid_' + index).hide() 
+               $('#pcid_' + index).hide() 
             }	
          }	  
       }                
@@ -104,13 +104,28 @@ var webmap = {
 		}
 	},
 	
-   filterPOI : function (f) {	
+   filterGeojson : function (f) {	
 	   if (f.geometry.type != 'Polygon' && f.properties.name != undefined ) {
          return f;    
       } 
 	},	
 	
-   formatInfo : function (feature, index) {
+	filterList : function () {
+		var search_txt = document.getElementById('filter_id').value;
+		console.log(search_txt)
+      for (i = 0; i < webmap.geojsonPOI.length; i++) {
+        if (webmap.geojsonPOI[i].properties.name == search_txt){  // replace by a more intelligent and dynamic match criteria
+           console.log('match')
+           $('#pid_' + i).show();
+        }
+        else {
+           $('#pid_' + i).hide();
+        }
+      }
+   },
+   
+	
+   formatInfo : function (index, feature) {
       var poi_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
    	
    	poi_phone = webmap.formatPhone(feature);
@@ -119,7 +134,7 @@ var webmap = {
       
       // Add a condition to remove useless div poi_content in case of no content
       if (poi_phone != "" || poi_website != "" || poi_opening_hours != "" ) {
-         poi_content = "<div class='poi_content' id='pid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
+         poi_content = "<div class='poi_content' id='pcid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
       }
       else{
          poi_content = "";
@@ -196,7 +211,7 @@ var webmap = {
          cpt = 0;   
          $.each(data.features, function(i, f) { 
             // Filtering
-            ff = webmap.filterPOI(f);
+            ff = webmap.filterGeojson(f);
             
             if (ff != undefined ) {
             	// 1) Set the POI layer
@@ -266,12 +281,12 @@ var webmap = {
 	selectPoi : function (index) {
       console.log(index)
 		// Show poi_content
-		var ishidden = $('#pid_' + index).is(':hidden');
+		var ishidden = $('#pcid_' + index).is(':hidden');
 		if(ishidden) {
-         $('#pid_' + index).show();
+         $('#pcid_' + index).show();
       }
       else{
-      	$('#pid_' + index).hide();
+      	$('#pcid_' + index).hide();
       }
 	
       // highlight icon and/or show popup

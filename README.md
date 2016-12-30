@@ -34,9 +34,10 @@ The file items.json is generated from the first page ods file osm_tags_filter.od
 
 * Popups and highlight icons...
 * Think about icons
-* Attributions of icons
+* where is the Attributions?
 * Sort POI in the list, with  webmap.geojsonPOI
 * another base map
+* filter field
 
 Further:
 
