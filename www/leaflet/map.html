@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/style.css" type="text/css" />
  </head>
  <body> 
+   <!--div class="col-xs-12" id="map2" ><div class="ui-widget" id="filter_list"><input id="filter_id" name="filter_input" ></div></div--> 
    
    <!-- navigation bar -->
    <nav class="navbar navbar-fixed-top header" role="navigation">
@@ -22,6 +23,7 @@
     </div>
     <div>
      <ul class="nav navbar-nav navbar-right">
+      <!--div class="ui-widget" id="filter_list"><input id="filter_id" name="filter_input" ><button onclick="webmap.filterList();">Go!</button></div-->
     </ul>
     </div>
    </nav>
@@ -35,16 +37,17 @@
       <button type="button" class="btn"  onclick="webmap.collapsePanelXs();"><img src="img/icon_info.png"></button>
     </div>
        
-    <div  id="panel" >  
+    <div id="panel" >  
+    
       <div id="collapseBtn" class="hidden-xs" >     
        <button type="button" class="btn btn-sm"  onclick="webmap.collapsePanel();"><</button>
       </div> 
     
       <div class="container-fluid" id="panelContent"> 
 
-   
         <div id="list"> 
-          <div id="filter_list"><input id="filter_id" name="filter_input" ></input><button onclick="webmap.filterList();">Go!</button></div>  
+  
+          <div class="ui-widget" id="filter_list"><input id="filter_id" class="form-control" value="Rechercher..." ></div> 
           <div class='poi_title' id='first_poi_title'>Horeca</div><div id='first_poi_list'></div>
           <div class='poi_title' id='second_poi_title'>Commerces</div><div id='second_poi_list'></div>
           <div class='poi_title' id='third_poi_title'>Services</div><div id='third_poi_list'></div>
@@ -64,7 +67,6 @@
   <script type="text/javascript" src="lib/leaflet/leaflet.js"></script> 
   <script type="text/javascript" src="items.json"></script>
   <script type="text/javascript" src="map.js"></script>
-
  </body>  
 </html>
 

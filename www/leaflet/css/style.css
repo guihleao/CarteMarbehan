@@ -122,13 +122,6 @@ div#list h2:first-child{
   }
 }
 
-/* OpenLayers controls */
-
-.leaflet-control-container {
-   position: absolute;
-   right: 42px;     
-}
-
 @media all and (max-width: 768px) {
   .ol-zoom {
      top: initial;   /* needed to clear the top property specified by OpenLayers */
@@ -161,6 +154,7 @@ div#list h2:first-child{
 
 .poi_name{
    font-weight: bold;
+   font-size: 1em;
    padding-bottom: 1em;
    padding-top: 0.5em;
 
@@ -192,3 +186,15 @@ div#first_poi_title{
    padding-right: 0.3em;
  }
  
+#filter_id{
+   width: 240px;
+   margin-left: 2px;
+   margin-bottom: 10px;
+	color: #666;
+	font-size: 0.9em;
+}
+	
+/* Need to add this for showing the autocomplete because of bootstrap incompatibility*/
+.ui-autocomplete {
+    z-index: 5000;
+}

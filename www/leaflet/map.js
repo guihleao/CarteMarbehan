@@ -8,7 +8,8 @@ var webmap = {
 	
 	geojsonPOI: [],
 	markerLayer: null,	
-	markerList : [],
+	markerArr : [],
+	filterArr : [],
 	showPanel : true,
 	showPanelXs : false,
 	url : "data/Habay_29122016.geojson",
@@ -110,20 +111,31 @@ var webmap = {
       } 
 	},	
 	
-	filterList : function () {
-		var search_txt = document.getElementById('filter_id').value;
-		console.log(search_txt)
+	
+	filterList : function (val) {	
       for (i = 0; i < webmap.geojsonPOI.length; i++) {
-        if (webmap.geojsonPOI[i].properties.name == search_txt){  // replace by a more intelligent and dynamic match criteria
-           console.log('match')
-           $('#pid_' + i).show();
-        }
-        else {
-           $('#pid_' + i).hide();
-        }
+      	if (val == null) {
+      		$('#pid_' + i).show();
+      		}
+      	else {
+     
+            if (webmap.geojsonPOI[i].properties.name == val){  
+               $('#pid_' + i).show();
+            }
+            else {
+               $('#pid_' + i).hide();
+            }
+         }
       }
    },
    
+   filterNoList : function () {
+      var val = $('#filter_id').val()
+         if (val == "") {
+           $('.poi').show();
+         }
+   
+   },
 	
    formatInfo : function (index, feature) {
       var poi_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
@@ -137,7 +149,7 @@ var webmap = {
          poi_content = "<div class='poi_content' id='pcid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
       }
       else{
-         poi_content = "";
+         poi_content = "<div class='poi_content' id='pcid_" + index + "'>" + "Pas de détails disponibles" + "</div>";
       }
       
       return poi_content;
@@ -203,6 +215,7 @@ var webmap = {
 
 	// Populate the list
    loadGeojson : function(url) {
+      var geojsonLayer;  	
    	
       // Get data
       $.getJSON(url, function(data) {
@@ -220,10 +233,23 @@ var webmap = {
                webmap.add2list(cpt,ff);
                cpt++;
             }             
-         });  
+         }); 
+          
          // Add the POI layer 
          var geojsonLayer = webmap.setGeojsonLayer();
          webmap.Lmap.addLayer(geojsonLayer); 
+         
+         // Set the autocomplete search box
+         for (i = 0; i < webmap.geojsonPOI.length; i++) {
+            webmap.filterArr.push(webmap.geojsonPOI[i].properties.name)
+         };
+         
+         $('#filter_id').autocomplete({
+            source: webmap.filterArr,
+            select: function (event, ui) {
+               webmap.filterList(ui.item.value)
+            }
+         });	
       
       });    
    },	
@@ -254,7 +280,7 @@ var webmap = {
            break;
         }
         else {
-           img_file = "conveniencestore";
+           img_file = "default";
         }
      }         
         
@@ -269,6 +295,8 @@ var webmap = {
       	if (poi_city != undefined) { 
       	   popupContent = "<div id='popup'>" + feature.properties.name + ' (' + poi_city + ')' + "</div>"; 
       	}
+      	else { popupContent = "<div id='popup'>" + feature.properties.name + "</div>";     
+      }
       }
       else { popupContent = "<div id='popup'>" + feature.properties.name + "</div>";     
       }
@@ -296,7 +324,7 @@ var webmap = {
       }
       else{
       	// Open popups from the list
-         webmap.markerList[index].openPopup();
+         webmap.markerArr[index].openPopup();
          
          // Highlight poi on the map
          webmap.highlightPoi(index); 
@@ -307,20 +335,20 @@ var webmap = {
 	   webmap.unhighlightPoi();
 	 
 	   console.log('highlight poi');
-	   var selected_icon = webmap.markerList[index].options.icon;
+	   var selected_icon = webmap.markerArr[index].options.icon;
       selected_icon.options.iconSize = [42,47]
-      webmap.markerList[index].setIcon(selected_icon)
+      webmap.markerArr[index].setIcon(selected_icon)
 	},
 	
    // Un-highlight poi on the map
-   // on certains conditions, 	unselected_icon.options.iconSize = [32,37]; webmap.markerList[index].setIcon(unselected_icon)
+   // on certains conditions, 	unselected_icon.options.iconSize = [32,37]; webmap.markerArr[index].setIcon(unselected_icon)
 	// conditions are: single click but no single click on POI icon, other popup fire,  
    unhighlightPoi : function () {   
      console.log('unhighlight poi');
-     for (var i = 0; i < webmap.markerList.length; i++) {
-        var unselected_icon = webmap.markerList[i].options.icon;
+     for (var i = 0; i < webmap.markerArr.length; i++) {
+        var unselected_icon = webmap.markerArr[i].options.icon;
         unselected_icon.options.iconSize = [32,37]
-        webmap.markerList[i].setIcon(unselected_icon)
+        webmap.markerArr[i].setIcon(unselected_icon)
      }
    },	
 	
@@ -335,7 +363,7 @@ var webmap = {
             },
         onEachFeature: function (feature, layer) {
 			    layer.bindPopup(webmap.makePopupContent(feature));
-			    webmap.markerList.push(webmap.markerLayer);
+			    webmap.markerArr.push(webmap.markerLayer);
 	        }	        
       });		
 	   return geojsonLayer;    	
@@ -369,20 +397,26 @@ var webmap = {
 		
 		// Add a background layer (LeafletJS)
       var baseLayer = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
-	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="https://mapicons.mapsmarker.com">Maps Icons Collection</a>',
+	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Icons from <a href="https://mapicons.mapsmarker.com">Maps Icons Collection</a>',
 	      subdomains: 'abcd',
 	      minZoom: 0,
 	      maxZoom: 20,
 	      ext: 'png'
       });		
+      
+      // Put the zoom icon on the top right of the map
+      webmap.Lmap.zoomControl.setPosition('topright')
 
       /*var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       });*/
 	   webmap.Lmap.addLayer(baseLayer);  
-	  
+	   
       // Load Geojson, add layer and populate the list
       webmap.loadGeojson(webmap.url);   
+
+      // Set the full list of POI when search bar is empty
+      $('#filter_id').on('change', function () {webmap.filterNoList();});
       
       // unhighlight POIs
       $('#map').on('click', function () {webmap.unhighlightPoi();});
@@ -393,3 +427,4 @@ var webmap = {
 
 // Initialize the page
 webmap.init();
+

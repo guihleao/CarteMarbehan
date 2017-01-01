@@ -34,13 +34,13 @@ The file items.json is generated from the first page ods file osm_tags_filter.od
 
 * Popups and highlight icons...
 * Think about icons
-* where is the Attributions?
 * Sort POI in the list, with  webmap.geojsonPOI
 * another base map
-* filter field
+
 
 Further:
 
 * Script for analysing OSM data
 * Make a sequence diagram for JS functions
+* Display list as a function of map view, link map icons and list. 
 * Find smart ways of handling opening hours data...
