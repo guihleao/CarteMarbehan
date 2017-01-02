@@ -128,7 +128,7 @@ items = [
  {
    "OSM_key": "recycling_type",
    "OSM_value": "centre",
-   "png_file": "",
+   "png_file": "foodcan",
    "category": "services"
  },
  {
