@@ -267,8 +267,13 @@ var webmap = {
             OSM_value_in_geojson = feature.properties.shop;         
          }      
          else {
+         if (feature.properties.recycling_type != undefined){
+     	      OSM_key_in_geojson = "recycling_type";    
+            OSM_value_in_geojson = feature.properties.recycling_type;         
+         }  else {
             OSM_key_in_geojson = undefined;    
-            OSM_value_in_geojson = undefined;    
+            OSM_value_in_geojson = undefined;
+            }   
          } 
      }     	
 
@@ -416,7 +421,10 @@ var webmap = {
       webmap.loadGeojson(webmap.url);   
 
       // Set the full list of POI when search bar is empty
-      $('#filter_id').on('change', function () {webmap.filterNoList();});
+      $('#filter_id').on('change', function () { webmap.filterNoList(); });
+      
+      // Set the clear buton
+      $("#filter_clear").click(function(){ $("#filter_id").val(''); webmap.filterNoList(); });
       
       // unhighlight POIs
       $('#map').on('click', function () {webmap.unhighlightPoi();});

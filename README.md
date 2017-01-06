@@ -13,11 +13,7 @@ This project can be divided in two main sections: 1) the collection of OSM data 
 
 The data displayed in this webmap (named points of interests (POI)) represents shops and services. These POI are collected through an overpass-turbo query based on a collection of key-value OSM tags. Data is exported from overpass-turbo as a geoJSON file. Note that for most of POI, both `node` and `ways` are queried, because these POI may be represented either by a point (`node`) or a polygon delineating a building (`ways`). But some POI appeared to be also modelled as `relations` (e.g., school). The query is within the file overpass-query.txt. By adding `center` in `out center body;` at the end of the overpass query, ways and relations are summarized by a point (centroid of the polygons). There may be some duplicata when both a point and ways exist for the same POI. 
 
-The geoJSON file is used twice in the webmap:
-* 1) For the map, it is loaded directly in the HTML in a <script></script>.
-* 2) For the list, it is loaded by a jquery function ($.getJSON)
-
-This should be merged into one function in the future...
+The geoJSON file is used twice in the webmap (for the map and the list) but is loaded once in the `loadGeojson(url)` function.  
 
 ### Webmap development
 

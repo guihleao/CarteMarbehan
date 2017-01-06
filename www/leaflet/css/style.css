@@ -186,7 +186,7 @@ div#first_poi_title{
    padding-right: 0.3em;
  }
  
-#filter_id{
+#filter_id {
    width: 240px;
    margin-left: 2px;
    margin-bottom: 10px;
@@ -194,6 +194,17 @@ div#first_poi_title{
 	font-size: 0.9em;
 }
 	
+#filter_clear {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 22px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc;
+}
 /* Need to add this for showing the autocomplete because of bootstrap incompatibility*/
 .ui-autocomplete {
     z-index: 5000;
