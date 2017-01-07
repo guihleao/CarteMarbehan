@@ -128,7 +128,7 @@ items = [
  {
    "OSM_key": "recycling_type",
    "OSM_value": "centre",
-   "png_file": "foodcan",
+   "png_file": "recycle",
    "category": "services"
  },
  {
@@ -172,5 +172,17 @@ items = [
    "OSM_value": "supermarket",
    "png_file": "supermarket",
    "category": "commerces"
- }
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "convenience",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "deli",
+   "png_file": "supermarket",
+   "category": "commerces"
+ } 
 ]

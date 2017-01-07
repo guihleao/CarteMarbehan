@@ -63,6 +63,10 @@
   way['shop'='optician'](area.searchArea);
   node['shop'='supermarket'](area.searchArea);
   way['shop'='supermarket'](area.searchArea);
+  node['shop'='convenience'](area.searchArea);
+  way['shop'='convenience'](area.searchArea);
+  node['shop'='deli'](area.searchArea);
+  way['shop'='deli'](area.searchArea);
 );
 // print results -  center add a centroid for polygons. 
 out center body;

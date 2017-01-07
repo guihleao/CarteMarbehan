@@ -12,7 +12,7 @@ var webmap = {
 	filterArr : [],
 	showPanel : true,
 	showPanelXs : false,
-	url : "data/Habay_29122016.geojson",
+	url : "data/Habay_07012017.geojson",
 
 	/////////////
 	// OBJECTS //
@@ -80,12 +80,14 @@ var webmap = {
 	collapsePanel : function(){
 		if(webmap.showPanel === true){
 		   $('div#panel').css('width','35px');
-		   $('div#panelContent').css('opacity','0');
+		   $('div#filterBox').css('opacity','0');
+		   $('div#panelContent').css('opacity','0');   
 		   $('div#collapseBtn button').text('>');
 		   webmap.showPanel =! webmap.showPanel;
 		}
 	   else{
 		   $('div#panel').css('width','300px');
+		   $('div#filterBox').css('opacity','1');
 		   $('div#panelContent').css('opacity','1');
 		   $('div#collapseBtn button').text('<');
 		   webmap.showPanel =! webmap.showPanel;
@@ -95,11 +97,13 @@ var webmap = {
 	collapsePanelXs : function(){
 		if(webmap.showPanelXs === true){
 		   $('div#panel').css('width','0px');
+		   $('div#filterBox').css('opacity','0');
 		   $('div#panelContent').css('opacity','0' );
 		   webmap.showPanelXs =! webmap.showPanelXs;
 	   }
 	   else{
 	      $('div#panel').css('width','calc(100% - 45px)');
+	      $('div#filterBox').css('opacity','1');
 	      $('div#panelContent').css('opacity','1');
 		   webmap.showPanelXs =! webmap.showPanelXs;
 		}
@@ -130,7 +134,7 @@ var webmap = {
    },
    
    filterNoList : function () {
-      var val = $('#filter_id').val()
+      var val = $('#filterId').val()
          if (val == "") {
            $('.poi').show();
          }
@@ -244,7 +248,7 @@ var webmap = {
             webmap.filterArr.push(webmap.geojsonPOI[i].properties.name)
          };
          
-         $('#filter_id').autocomplete({
+         $('#filterId').autocomplete({
             source: webmap.filterArr,
             select: function (event, ui) {
                webmap.filterList(ui.item.value)
@@ -260,21 +264,24 @@ var webmap = {
 
       if (feature.properties.amenity != undefined){
      	   OSM_key_in_geojson = "amenity";
-     	   OSM_value_in_geojson = feature.properties.amenity;    
+     	   OSM_value_in_geojson = feature.properties.amenity;  
+     	   if (feature.properties.recycling_type != undefined){
+     	      OSM_key_in_geojson = "recycling_type";    
+            OSM_value_in_geojson = feature.properties.recycling_type;    
+            console.log('recycling')     
+         }  
       } else {
+      	console.log('shop')
          if (feature.properties.shop != undefined){
      	      OSM_key_in_geojson = "shop";    
             OSM_value_in_geojson = feature.properties.shop;         
          }      
+         
          else {
-         if (feature.properties.recycling_type != undefined){
-     	      OSM_key_in_geojson = "recycling_type";    
-            OSM_value_in_geojson = feature.properties.recycling_type;         
-         }  else {
-            OSM_key_in_geojson = undefined;    
-            OSM_value_in_geojson = undefined;
-            }   
-         } 
+           OSM_key_in_geojson = undefined;    
+           OSM_value_in_geojson = undefined;
+         }   
+          
      }     	
 
      // loop over the category on items.json
@@ -385,7 +392,7 @@ var webmap = {
       	popupAnchor: [0, -30],
       	iconSize: [32, 37]
       });
-      
+      http://stackoverflow.com/questions/20062218/how-do-i-clear-a-search-box-with-an-x-in-bootstrap-3#22375617
       return iconPOI; 
    },  
    
@@ -421,10 +428,10 @@ var webmap = {
       webmap.loadGeojson(webmap.url);   
 
       // Set the full list of POI when search bar is empty
-      $('#filter_id').on('change', function () { webmap.filterNoList(); });
+      $('#filterId').on('change', function () { webmap.filterNoList(); });
       
       // Set the clear buton
-      $("#filter_clear").click(function(){ $("#filter_id").val(''); webmap.filterNoList(); });
+      $("#filterClear").click(function(){ $("#filterId").val(''); webmap.filterNoList(); });
       
       // unhighlight POIs
       $('#map').on('click', function () {webmap.unhighlightPoi();});

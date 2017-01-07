@@ -12,21 +12,19 @@
   <link rel="stylesheet" href="css/style.css" type="text/css" />
  </head>
  <body> 
-   <!--div class="col-xs-12" id="map2" ><div class="ui-widget" id="filter_list"><input id="filter_id" name="filter_input" ></div></div--> 
-   
+ 
    <!-- navigation bar -->
-   <nav class="navbar navbar-fixed-top header" role="navigation">
-    <div>
-     <ul class="nav navbar-nav navbar-left">
-      <li><a href="#">Carte des Services</a></li>
-     </ul>
-    </div>
-    <div>
-     <ul class="nav navbar-nav navbar-right">
-      <!--div class="ui-widget" id="filter_list"><input id="filter_id" name="filter_input" ><button onclick="webmap.filterList();">Go!</button></div-->
+  <nav class="navbar navbar-fixed-top header" role="navigation">
+   <div>
+    <ul class="nav navbar-nav navbar-left">
+     <li><a href="#">Habay-la-Neuve</a></li>
     </ul>
-    </div>
-   </nav>
+   </div>
+   <div>
+     <ul class="nav navbar-nav navbar-right">
+   </ul>
+   </div>
+  </nav>
    
   <div class="container bodyContainer">
    <div class="row mapContainer"> 
@@ -42,15 +40,14 @@
       <div id="collapseBtn" class="hidden-xs" >     
        <button type="button" class="btn btn-sm"  onclick="webmap.collapsePanel();"><</button>
       </div> 
-    
+      <div id="filterBox" class="ui-widget btn-group" >
+        <input id="filterId" class="form-control" placeholder="Rechercher..." >
+        <span id="filterClear" class="glyphicon glyphicon-remove-circle"></span>         
+      </div>
+      
       <div class="container-fluid" id="panelContent"> 
-
+      
         <div id="list"> 
-  
-          <div class="ui-widget btn-group" id="filter_list">
-            <input id="filter_id" class="form-control" placeholder="Rechercher..." >
-            <span id="filter_clear" class="glyphicon glyphicon-remove-circle"></span>         
-          </div> 
           <div class='poi_title' id='first_poi_title'>Horeca</div><div id='first_poi_list'></div>
           <div class='poi_title' id='second_poi_title'>Commerces</div><div id='second_poi_list'></div>
           <div class='poi_title' id='third_poi_title'>Services</div><div id='third_poi_list'></div>

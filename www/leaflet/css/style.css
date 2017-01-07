@@ -70,14 +70,14 @@ div#panel {
   opacity: 0.92;
   -webkit-transition: width 0.6s;
   transition: width 0.6s;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 div#collapseBtnXs{
    position: absolute;
    bottom: 10px;
    left: 10px;
-   z-index:1001;
+   z-index:1002;
 }
 
 div#collapseBtnXs img{
@@ -91,7 +91,7 @@ div#collapseBtnXs button {
 
 div#collapseBtn {
   float:right;
-  margin-top: 3px;
+  margin-top: 7px;
   margin-right: 3px;
   font-weight: bold;
 }
@@ -113,24 +113,6 @@ div#list h2:first-child{
 
 }  
   
-@media all and (max-width: 768px) {
-  div#panel {
-  	 width: 0px;
-  	 }
-  div#panelContent{
-  	 opacity: 0;
-  }
-}
-
-@media all and (max-width: 768px) {
-  .ol-zoom {
-     top: initial;   /* needed to clear the top property specified by OpenLayers */
-     right: 8px;
-     bottom: 6px;
-     left: auto;   /* needed to avoid the background-color of the ol zoom control spanning from the left side of the screen */
-   }
-}
-
 .poi{
 	
 }
@@ -186,20 +168,24 @@ div#first_poi_title{
    padding-right: 0.3em;
  }
  
-#filter_id {
+#filterBox {
+    margin-top: 5px;
+    margin-left: 14px;
+    margin-bottom: 10px;
+} 
+ 
+#filterId {
    width: 240px;
-   margin-left: 2px;
-   margin-bottom: 10px;
 	color: #666;
 	font-size: 0.9em;
 }
 	
-#filter_clear {
+#filterClear {
     position: absolute;
     right: 5px;
     top: 0;
     bottom: 0;
-    height: 22px;
+    height: 16px;
     margin: auto;
     font-size: 14px;
     cursor: pointer;
@@ -208,4 +194,20 @@ div#first_poi_title{
 /* Need to add this for showing the autocomplete because of bootstrap incompatibility*/
 .ui-autocomplete {
     z-index: 5000;
+}
+
+
+@media all and (max-width: 768px) {
+  div#panel {
+  	 width: 0px;
+  }
+  div#panelContent{
+  	 opacity: 0;
+  }
+  div#filterBox {
+  	 opacity: 0;
+  }
+  #filterId {
+  	 width: 260px;
+  }
 }

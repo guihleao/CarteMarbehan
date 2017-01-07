@@ -36,6 +36,7 @@ The file items.json is generated from the first page ods file osm_tags_filter.od
 
 Further:
 
+* About page in a bootstrap modal window
 * Script for analysing OSM data
 * Make a sequence diagram for JS functions
 * Display list as a function of map view, link map icons and list. 
