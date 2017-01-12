@@ -37,8 +37,11 @@
        
     <div id="panel" >  
     
-      <div id="collapseBtn" class="hidden-xs" >     
+      <div id="collapseBtn" class="hidden-xs">     
        <button type="button" class="btn btn-sm"  onclick="webmap.collapsePanel();"><</button>
+      </div> 
+      <div id="closeBtnXs" class="visible-xs">     
+       <button type="button" class="btn btn-md"  onclick="webmap.collapsePanelXs();">&#8592;</button>
       </div> 
       <div id="filterBox" class="ui-widget btn-group" >
         <input id="filterId" class="form-control" placeholder="Rechercher..." >
@@ -48,6 +51,7 @@
       <div class="container-fluid" id="panelContent"> 
       
         <div id="list"> 
+          <div id="listHeader">Cliquer sur les noms pour plus de détails</div>
           <div class='poi_title' id='first_poi_title'>Horeca</div><div id='first_poi_list'></div>
           <div class='poi_title' id='second_poi_title'>Commerces</div><div id='second_poi_list'></div>
           <div class='poi_title' id='third_poi_title'>Services</div><div id='third_poi_list'></div>

@@ -32,11 +32,16 @@ The file items.json is generated from the first page ods file osm_tags_filter.od
 * Think about icons
 * Sort POI in the list, with  webmap.geojsonPOI
 * another base map
+* increase items in overpass queries and items.json
+* mobile: remove "entry menu" when item is selected in the drop-down menu (so in webmap.filterList())
+* mobile: swipe left panel
+* mobile: geoloc
 
 
 Further:
 
 * About page in a bootstrap modal window
+* try on large cities
 * Script for analysing OSM data
 * Make a sequence diagram for JS functions
 * Display list as a function of map view, link map icons and list. 

@@ -99,12 +99,17 @@ var webmap = {
 		   $('div#panel').css('width','0px');
 		   $('div#filterBox').css('opacity','0');
 		   $('div#panelContent').css('opacity','0' );
+		   $('div#collapseBtnXs').css('opacity','1');
+		   $('div#closeBtnXs').css('opacity','0');
 		   webmap.showPanelXs =! webmap.showPanelXs;
 	   }
 	   else{
 	      $('div#panel').css('width','calc(100% - 45px)');
+	      $('div#panel').css('max-width','310px');
 	      $('div#filterBox').css('opacity','1');
 	      $('div#panelContent').css('opacity','1');
+	      $('div#collapseBtnXs').css('opacity','0');
+	      $('div#closeBtnXs').css('opacity','1');
 		   webmap.showPanelXs =! webmap.showPanelXs;
 		}
 	},
@@ -125,6 +130,7 @@ var webmap = {
      
             if (webmap.geojsonPOI[i].properties.name == val){  
                $('#pid_' + i).show();
+               $('#pcid_' + i).show();
             }
             else {
                $('#pid_' + i).hide();
