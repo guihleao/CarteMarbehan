@@ -25,6 +25,9 @@ The map icons are from https://mapicons.mapsmarker.com/. Colors of the icons can
 
 The file items.json is generated from the first page ods file osm_tags_filter.ods (using a csv2json online converter). The second page can be used to generate the overpass query. 
 
+## License
+This work is licensed under the MIT license https://opensource.org/licenses/MIT.
+
 
 ## TO DO
 
@@ -33,6 +36,8 @@ The file items.json is generated from the first page ods file osm_tags_filter.od
 * Sort POI in the list, with  webmap.geojsonPOI
 * another base map
 * increase items in overpass queries and items.json
+* check/improve searchBar width
+* improve icon (i) by adding a border
 * mobile: remove "entry menu" when item is selected in the drop-down menu (so in webmap.filterList())
 * mobile: swipe left panel
 * mobile: geoloc
