@@ -1,5 +1,9 @@
-// Carte des services - LeafletJS - dec. 2016
-
+/*!
+ * Carte Des Services
+ * Copyright 2016-2017 Julien Minet 
+ * Licensed under the MIT license
+ */
+ 
 var webmap = {
 
    ///////////////
@@ -12,7 +16,7 @@ var webmap = {
 	filterArr : [],
 	showPanel : true,
 	showPanelXs : false,
-	url : "data/Habay_07012017.geojson",
+	url : "data/Habay_26012017.geojson",
 
 	/////////////
 	// OBJECTS //
@@ -148,15 +152,16 @@ var webmap = {
    },
 	
    formatInfo : function (index, feature) {
-      var poi_content, poi_name, poi_addr_street, poi_addr_housenumber, poi_addr_city, poi_phone, poi_website, poi_opening_hours
+      var poi_content, poi_name, poi_phone, poi_website, poi_opening_hours, poi_address;
    	
    	poi_phone = webmap.formatPhone(feature);
    	poi_website = webmap.formatWebsite(feature);
    	poi_opening_hours = webmap.formatOpeningHours(feature);
+   	poi_address = webmap.formatAddress(feature);
       
       // Add a condition to remove useless div poi_content in case of no content
-      if (poi_phone != "" || poi_website != "" || poi_opening_hours != "" ) {
-         poi_content = "<div class='poi_content' id='pcid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + "</div>";
+      if (poi_phone != "" || poi_website != "" || poi_opening_hours != "" || poi_address != "") {
+         poi_content = "<div class='poi_content' id='pcid_" + index + "'>" + poi_phone + poi_website + poi_opening_hours + poi_address + "</div>";
       }
       else{
          poi_content = "<div class='poi_content' id='pcid_" + index + "'>" + "Pas de détails disponibles" + "</div>";
@@ -164,6 +169,26 @@ var webmap = {
       
       return poi_content;
    }, 	
+	
+   formatAddress : function (feature){
+   	var poi_address;
+   	var header = "<p class='address'>";
+      var footer = "</p>"; 
+      
+      var addr_housenumber = feature.properties['addr:housenumber'];
+      var addr_street = feature.properties['addr:street'];
+      var addr_postcode = feature.properties['addr:postcode'];
+      var addr_city = feature.properties['addr:city'];
+   	
+   	if (addr_housenumber  != undefined && addr_street != undefined && addr_postcode != undefined && addr_city != undefined) {
+   		poi_address = header + addr_street + ', ' + addr_housenumber + ' - ' + addr_postcode + ' ' + addr_city + footer;
+   		} 
+   	else {
+   		poi_address = "";
+   	}
+      
+      return poi_address;
+   },		
 	
    formatPhone : function (feature){
    	var poi_phone;
@@ -266,6 +291,7 @@ var webmap = {
 	
 	// Test if feature is in category and return corresponding icon file
    mapCategory : function (feature) {
+   	// 17/01/2017: why not using JSON.parse() here: useful if want to have an object instead of a string
       var cat, img_file, OSM_key_in_geojson, OSM_value_in_geojson    	
 
       if (feature.properties.amenity != undefined){
@@ -307,19 +333,25 @@ var webmap = {
    
 	// display popup
 	makePopupContent : function (feature) {
-      var popupContent;	   
+      var popup_content, popup_subcontent;	   
+      var poi_phone = webmap.formatPhone(feature);
+   	var poi_website = webmap.formatWebsite(feature);
+   	var poi_opening_hours = webmap.formatOpeningHours(feature);
+      
+      popup_subcontent =  poi_phone + poi_website + poi_opening_hours;    
+      
 	   if (feature.properties.amenity === 'school' || feature.properties.amenity === 'bank') { 
          var poi_city = feature.properties['addr:city'];
       	if (poi_city != undefined) { 
-      	   popupContent = "<div id='popup'>" + feature.properties.name + ' (' + poi_city + ')' + "</div>"; 
+      	   popup_content = "<div class='popupContent'><p class='popupName'>" + feature.properties.name + ' (' + poi_city + ')</p>' + popup_subcontent + "</p></div>"; 
       	}
-      	else { popupContent = "<div id='popup'>" + feature.properties.name + "</div>";     
+      	else { popup_content = "<div class='popupContent'><p class='popupName'>" + feature.properties.name + "</p>" + popup_subcontent + "</div>";     
       }
       }
-      else { popupContent = "<div id='popup'>" + feature.properties.name + "</div>";     
+      else { popup_content = "<div class='popupContent'><p class='popupName'>" + feature.properties.name + "</p>" + popup_subcontent + "</div>";     
       }
       
-      return popupContent;
+      return popup_content;
     },
 		
 		

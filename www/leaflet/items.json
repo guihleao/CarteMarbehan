@@ -1,3 +1,9 @@
+/*!
+ * Carte Des Services
+ * Copyright 2016-2017 Julien Minet 
+ * Licensed under the MIT license
+ */
+
 items = [
  {
    "OSM_key": "amenity",
@@ -116,19 +122,19 @@ items = [
  {
    "OSM_key": "amenity",
    "OSM_value": "hospital",
-   "png_file": "",
+   "png_file": "hospital-building",
    "category": "services"
  },
  {
    "OSM_key": "amenity",
    "OSM_value": "veterinary",
-   "png_file": "",
+   "png_file": "veterinary",
    "category": "services"
  },
  {
    "OSM_key": "recycling_type",
    "OSM_value": "centre",
-   "png_file": "recycle",
+   "png_file": "foodcan",
    "category": "services"
  },
  {
@@ -157,6 +163,30 @@ items = [
  },
  {
    "OSM_key": "shop",
+   "OSM_value": "cheese",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "chocolate",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "convenience",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "deli",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
    "OSM_value": "doityourself",
    "png_file": "tools",
    "category": "commerces"
@@ -174,15 +204,153 @@ items = [
    "category": "commerces"
  },
  {
-   "OSM_key": "shop",
-   "OSM_value": "convenience",
+   "OSM_key": "shop ",
+   "OSM_value": "farm",
+   "png_file": "farmstand",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop ",
+   "OSM_value": "greengrocer",
    "png_file": "supermarket",
    "category": "commerces"
  },
  {
    "OSM_key": "shop",
-   "OSM_value": "deli",
+   "OSM_value": "mall",
    "png_file": "supermarket",
    "category": "commerces"
- } 
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "clothes",
+   "png_file": "clothers_male",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "shoes",
+   "png_file": "shoes",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "watches",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "charity",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "second_hand",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "beauty",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "electrical",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "energy",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "florist",
+   "png_file": "flowers",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "garden_centre",
+   "png_file": "flowers",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "hardware",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "houseware",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "trade",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "electronics",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "bicycle",
+   "png_file": "bicycle_shop",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "sports",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "craft",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "newsagent",
+   "png_file": "newsagent",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "shop",
+   "OSM_value": "toys",
+   "png_file": "supermarket",
+   "category": "commerces"
+ },
+ {
+   "OSM_key": "tourism",
+   "OSM_value": "hotel",
+   "png_file": "hotel_0star",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "tourism",
+   "OSM_value": "hostel",
+   "png_file": "hotel_0star",
+   "category": "horeca"
+ },
+ {
+   "OSM_key": "tourism",
+   "OSM_value": "guest_house",
+   "png_file": "hostel_0star",
+   "category": "horeca"
+ }
 ]
