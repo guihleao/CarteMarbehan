@@ -8,6 +8,7 @@ html, body {
 
 body {
   padding-top: 50px;   /* the size of the padding-top need to be the one of the navbar */
+  overflow: hidden;
 }
 
 /* Main containers */
@@ -78,6 +79,8 @@ div#collapseBtnXs{
    top: 60px;
    left: 10px;
    z-index:1002;
+   -webkit-transition: opacity 0.4s;
+   transition: opacity 0.4s;
 }
 
 div#collapseBtnXs img{
@@ -86,7 +89,8 @@ div#collapseBtnXs img{
 }
 
 div#collapseBtnXs button {
-  font-weight: bold;
+   background-color: #fff;
+   border: 2px solid rgba(0,0,0,0.2);
 }
 
 div#closeBtnXs {
@@ -94,8 +98,13 @@ div#closeBtnXs {
   float: left;
   margin-top: 5px;
   margin-left: 5px;
-  font-weight: bold;
 }
+
+div#closeBtnXs button{
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
 
 div#collapseBtn {
   float:right;
@@ -106,6 +115,8 @@ div#collapseBtn {
 
 div#collapseBtn button {
   font-weight: bold;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 
 div#panelContent {
@@ -194,13 +205,13 @@ div#first_poi_title{
  }
  
 #filterBox {
-    margin-top: 5px;
+    margin-top: 7px;
     margin-left: 14px;
     margin-bottom: 10px;
 } 
  
 #filterId {
-   width: 230px;
+   width: 240px;
 	color: #666;
 	font-size: 0.9em;
 }
@@ -231,9 +242,11 @@ div#first_poi_title{
   	 opacity: 0;
   }
   div#filterBox {
+  	 margin-top: 5px;
   	 opacity: 0;
+  	 margin-left: 6px;
   }
   #filterId {
-  	 width: 250px;
+  	 width: 230px;
   }
 }
