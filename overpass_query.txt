@@ -46,6 +46,8 @@
   way['amenity'='hospital'](area.searchArea);
   node['amenity'='veterinary'](area.searchArea);
   way['amenity'='veterinary'](area.searchArea);
+  node['amenity'='townhall'](area.searchArea);
+  way['amenity'='townhall'](area.searchArea);
   node['recycling_type'='centre'](area.searchArea);
   way['recycling_type'='centre'](area.searchArea);
   node['amenity'='cinema'](area.searchArea);

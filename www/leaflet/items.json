@@ -127,6 +127,12 @@ items = [
  },
  {
    "OSM_key": "amenity",
+   "OSM_value": "townhall",
+   "png_file": "default",
+   "category": "services"
+ },
+ {
+   "OSM_key": "amenity",
    "OSM_value": "veterinary",
    "png_file": "veterinary",
    "category": "services"
@@ -352,5 +358,11 @@ items = [
    "OSM_value": "guest_house",
    "png_file": "hostel_0star",
    "category": "horeca"
+ },
+ {
+   "OSM_key": "office",
+   "OSM_value": "employment_agency",
+   "png_file": "",
+   "category": "services"
  }
 ]

@@ -37,13 +37,12 @@ This work is licensed under the MIT license https://opensource.org/licenses/MIT.
 ## TO DO
 
 * See again mapCategory() function: should work with any OSM key
+* OSM: Add mutuelles, chich tagging?
 * Popups and highlight icons...
 * Think about icons
 * Sort POI in the list by type (icon), with webmap.geojsonPOI
 * another base map
 * increase items in overpass queries and items.json
-* check/improve searchBar width
-* improve icon (i) by adding a border
 * mobile: remove "entry menu" when item is selected in the drop-down menu (so in webmap.filterList())
 * mobile: swipe left panel
 * mobile: geoloc
