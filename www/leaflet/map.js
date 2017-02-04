@@ -333,6 +333,7 @@ var webmap = {
    
 	// display popup
 	makePopupContent : function (feature) {
+		
       var popup_content, popup_subcontent;	   
       var poi_phone = webmap.formatPhone(feature);
    	var poi_website = webmap.formatWebsite(feature);
@@ -373,7 +374,10 @@ var webmap = {
          webmap.highlightPoi(index); 
       }
       else{
-      	// Open popups from the list
+      	// Center the map on popup
+      	webmap.Lmap.setView(webmap.markerArr[index]._latlng);
+      	
+      	// Open popups from the list 
          webmap.markerArr[index].openPopup();
          
          // Highlight poi on the map
