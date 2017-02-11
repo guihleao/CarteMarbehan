@@ -16,7 +16,7 @@ var webmap = {
 	filterArr : [],
 	showPanel : true,
 	showPanelXs : false,
-	url : "data/Habay_04022017.geojson",
+	url : "data/Habay_11022017.geojson",
 
 	/////////////
 	// OBJECTS //
@@ -274,6 +274,11 @@ var webmap = {
          var geojsonLayer = webmap.setGeojsonLayer();
          webmap.Lmap.addLayer(geojsonLayer); 
          
+         // Sort the lists
+         webmap.sortLists("first_poi_list"); 
+         webmap.sortLists("second_poi_list"); 
+         webmap.sortLists("third_poi_list");         
+         
          // Set the autocomplete search box
          for (i = 0; i < webmap.geojsonPOI.length; i++) {
             webmap.filterArr.push(webmap.geojsonPOI[i].properties.name)
@@ -296,25 +301,45 @@ var webmap = {
 
       if (feature.properties.amenity != undefined){
      	   OSM_key_in_geojson = "amenity";
-     	   OSM_value_in_geojson = feature.properties.amenity;  
+     	   OSM_value_in_geojson = feature.properties.amenity;      	   
      	   if (feature.properties.recycling_type != undefined){
      	      OSM_key_in_geojson = "recycling_type";    
             OSM_value_in_geojson = feature.properties.recycling_type;    
-            console.log('recycling')     
+            //break;            
+            //console.log('recycling')     
          }  
-      } else {
-      	console.log('shop')
-         if (feature.properties.shop != undefined){
-     	      OSM_key_in_geojson = "shop";    
-            OSM_value_in_geojson = feature.properties.shop;         
-         }      
-         
-         else {
-           OSM_key_in_geojson = undefined;    
-           OSM_value_in_geojson = undefined;
-         }   
+      } 
+      else{
+      	
+        if (feature.properties.shop != undefined){
+          //console.log('shop')
+     	    OSM_key_in_geojson = "shop";    
+          OSM_value_in_geojson = feature.properties.shop; 
+         // break;        
+        } 
+        else{
+          if (feature.properties.office != undefined) {
+          	OSM_key_in_geojson = "office";    
+            OSM_value_in_geojson = feature.properties.office;
+            //break;
+            //console.log('office')
+          } 
+          else{
+            if (feature.properties.tourism != undefined) {
+         	  OSM_key_in_geojson = "tourism";    
+              OSM_value_in_geojson = feature.properties.tourism;
+              //break;
+              //console.log('tourism')                        
+            }
+            else{
+              OSM_key_in_geojson = undefined;    
+              OSM_value_in_geojson = undefined;
+              //console.log('undefined?')
+            }
+          }
+        }
+      }   
           
-     }     	
 
      // loop over the category on items.json
      for (i = 0; i < items.length; i++) {
@@ -423,10 +448,33 @@ var webmap = {
 	   return geojsonLayer;    	
 	},
 	
+	sortLists : function (list) {
+	   var list_div = document.getElementById(list);
+	   var list_poi = list_div.getElementsByClassName("poi"); 
+      var vals = [];
+      //var vals2 = [];
+
+      // Populate the array
+      for(var i = 0, l = list_poi.length; i < l; i++)
+         vals.push(list_poi[i].innerHTML);
+       //  vals2.push(list_poi[i].innerText);
+
+      // Sort it
+      vals.sort();
+     //  vals2.sort();
+      
+      // Change the list on the page
+      for(var i = 0, l = list_poi.length; i < l; i++)
+         list_poi[i].innerHTML = vals[i];
+         //for(var j = 0, l = list_poi.length; j < l; j++)
+         //   console.log(vals[j])
+         //   if (vals2[i] == vals[j].innerText) {list_poi[i].innerHTML = vals[i];}
+	
+	}, 
 
 	// set the style of the function, meaning the icon of the POIs
    stylePoi : function (feature) {
-    	var img_src = 'img/' + webmap.mapCategory(feature)[1] + '.png';      
+      var img_src = 'img/' + webmap.mapCategory(feature)[1] + '.png';      
       
       var iconPOI = new L.Icon({
       	iconUrl: img_src,

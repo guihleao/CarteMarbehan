@@ -3,7 +3,6 @@
 {{geocodeArea:Habay}}->.searchArea;
 // gather results
 (
-  // query part for: “shop”
   node['amenity'='bar'](area.searchArea);
   way['amenity'='bar'](area.searchArea);
   node['amenity'='biergarten'](area.searchArea);
@@ -44,10 +43,10 @@
   way['amenity'='doctors'](area.searchArea);
   node['amenity'='hospital'](area.searchArea);
   way['amenity'='hospital'](area.searchArea);
-  node['amenity'='veterinary'](area.searchArea);
-  way['amenity'='veterinary'](area.searchArea);
   node['amenity'='townhall'](area.searchArea);
   way['amenity'='townhall'](area.searchArea);
+  node['amenity'='veterinary'](area.searchArea);
+  way['amenity'='veterinary'](area.searchArea);
   node['recycling_type'='centre'](area.searchArea);
   way['recycling_type'='centre'](area.searchArea);
   node['amenity'='cinema'](area.searchArea);
@@ -122,6 +121,10 @@
   way['tourism'='hostel'](area.searchArea);
   node['tourism'='guest_house'](area.searchArea);
   way['tourism'='guest_house'](area.searchArea);
+  node['office'='employment_agency'](area.searchArea);
+  way['office'='employment_agency'](area.searchArea);
+  node['office'='administrative'](area.searchArea);
+  way['office'='administrative'](area.searchArea);
 );
 // print results -  center add a centroid for polygons. 
 out center body;

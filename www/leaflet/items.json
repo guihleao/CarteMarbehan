@@ -128,7 +128,7 @@ items = [
  {
    "OSM_key": "amenity",
    "OSM_value": "townhall",
-   "png_file": "default",
+   "png_file": "reception",
    "category": "services"
  },
  {
@@ -362,7 +362,13 @@ items = [
  {
    "OSM_key": "office",
    "OSM_value": "employment_agency",
-   "png_file": "",
+   "png_file": "reception",
+   "category": "services"
+ },
+ {
+   "OSM_key": "office",
+   "OSM_value": "administrative",
+   "png_file": "reception",
    "category": "services"
  }
 ]

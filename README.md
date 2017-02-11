@@ -36,11 +36,10 @@ This work is licensed under the MIT license https://opensource.org/licenses/MIT.
 
 ## TO DO
 
-* See again mapCategory() function: should work with any OSM key
-* OSM: Add mutuelles, chich tagging?
+* OSM: Add mutuelles, which tagging? --> office=administrative
 * Popups and highlight icons...
 * Think about icons
-* Sort POI in the list by type (icon), with webmap.geojsonPOI
+* Sort POI in the list by type (icon) ~done
 * another base map
 * increase items in overpass queries and items.json
 * mobile: remove "entry menu" when item is selected in the drop-down menu (so in webmap.filterList())
@@ -55,4 +54,4 @@ Further:
 * Script for analysing OSM data
 * Make a sequence diagram for JS functions
 * Display list as a function of map view, link map icons and list. 
-* Find smart ways of handling opening hours data...
+* Find smarter ways of handling opening hours data...

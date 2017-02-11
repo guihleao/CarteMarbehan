@@ -56,7 +56,7 @@ body {
 
 div#map {
   height: 100%;         /* to specify the full height for the map, works only if height is set in body and parent divs */ 
-  background-color: #b5d0d0; 
+  background-color: #F2F2F2; 
   padding-right: 0px;   /* need to overwrite the padding-right and padding-left set by bootstrap */
   padding-left: 0px;
 }
