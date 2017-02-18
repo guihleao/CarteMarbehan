@@ -37,7 +37,13 @@ This work is licensed under the MIT license https://opensource.org/licenses/MIT.
 ## TO DO
 
 * OSM: Add mutuelles, which tagging? --> office=administrative
-* Popups and highlight icons...
+* Popups and highlight icons...: still to revise!!! highlight should be more clear + center the map! also on mobile...
+* bug IE...
+* bug mobile when scrolling
+* sort items in the list
+* autocomplete results should live modify the list
+* add button zoom to village for demo purpose
+* Filtering by topic (=icon name)
 * Think about icons
 * Sort POI in the list by type (icon) ~done
 * another base map

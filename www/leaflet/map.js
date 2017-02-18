@@ -31,46 +31,41 @@ var webmap = {
 	
    // Add points of interests to the list
    add2list: function(index, feature) {
- 
-   	var poi_name, poi_content, catItems, imgFile;
-   	   	
-      poi_name = feature.properties.name;
-      	
-      if (feature.properties.amenity === 'school' || feature.properties.amenity === 'bank') { 
-         var poi_city = feature.properties['addr:city'];
-      	if (poi_city != undefined) { 
-      	   poi_name = poi_name + ' (' + poi_city + ')'
-      	}
-         else {
-      	   console.log('No city name for school / bank')
-      	}
-      }
+      console.log(index)
+      console.log(feature)
+      
+   	var poi_name, poi_content, cat, img_file;
+   	  
+   	// Get poi name 	
+      poi_name = webmap.getName(index)
         
       // Retrieve information for poi_content
       poi_content = webmap.formatInfo(index, feature);
          
-      [catItems, imgFile] = webmap.mapCategory(feature);
+      cat = webmap.getCategory(feature);
+      img_file = webmap.getImgFile(feature);
+      
           
-      if (catItems === 'horeca') { // TO DO: add here a condition to see if the feature is on the current view 
+      if (cat === 'horeca') { // TO DO: add here a condition to see if the feature is on the current view 
             
          // Build the item of the list
-         $("#first_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+         $("#first_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
          // Hide poi_content for each element
          $('#pcid_' + index).hide()           
       } else {
-         if (catItems === 'commerces') { // TO DO: add here a condition to see if the feature is on the current view 
+         if (cat === 'commerces') { // TO DO: add here a condition to see if the feature is on the current view 
             
             // Build the item of the list
-            $("#second_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+            $("#second_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
             // Hide poi_content for each element
             $('#pcid_' + index).hide() 
          } else {
-            if (catItems === 'services') { // TO DO: add here a condition to see if the feature is on the current view 
+            if (cat === 'services') { // TO DO: add here a condition to see if the feature is on the current view 
             
                // Build the item of the list
-               $("#third_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + imgFile + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+               $("#third_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
          
                // Hide poi_content for each element
                $('#pcid_' + index).hide() 
@@ -133,8 +128,10 @@ var webmap = {
       	else {
      
             if (webmap.geojsonPOI[i].properties.name == val){  
-               $('#pid_' + i).show();
-               $('#pcid_' + i).show();
+               webmap.selectPoi(i)
+               //$('#pid_' + i).show();
+               //$('#pcid_' + i).show();
+               
             }
             else {
                $('#pid_' + i).hide();
@@ -259,7 +256,9 @@ var webmap = {
          cpt = 0;   
          $.each(data.features, function(i, f) { 
             // Filtering
-            ff = webmap.filterGeojson(f);
+            ff = webmap.filterGeojson(f); // new index in this fct?
+            
+            // Sorting here?             
             
             if (ff != undefined ) {
             	// 1) Set the POI layer
@@ -269,19 +268,19 @@ var webmap = {
                cpt++;
             }             
          }); 
-          
+         
+         //Sorting here? before a add2list  
+         // 1) webmap.geojsonPOI.sort()  // adequate sorting?
+         // 2) for (i = 0; i < webmap.geojsonPOI.length; i++) { webmap.add2list(cpt,ff)} + modif of select fct for opening popups.     
+         
          // Add the POI layer 
          var geojsonLayer = webmap.setGeojsonLayer();
-         webmap.Lmap.addLayer(geojsonLayer); 
-         
-         // Sort the lists
-         webmap.sortLists("first_poi_list"); 
-         webmap.sortLists("second_poi_list"); 
-         webmap.sortLists("third_poi_list");         
+         webmap.Lmap.addLayer(geojsonLayer);                
          
          // Set the autocomplete search box
          for (i = 0; i < webmap.geojsonPOI.length; i++) {
-            webmap.filterArr.push(webmap.geojsonPOI[i].properties.name)
+        	//for (i = 0; i < cpt; i++) {
+            webmap.filterArr.push(webmap.getName(i))
          };
          
          $('#filterId').autocomplete({
@@ -290,21 +289,41 @@ var webmap = {
                webmap.filterList(ui.item.value)
             }
          });	
+         
+         // Sort the lists
+         /*webmap.sortLists("first_poi_list"); 
+         webmap.sortLists("second_poi_list"); 
+         webmap.sortLists("third_poi_list"); */
       
       });    
    },	
 	
+   getName : function (index) {
+      var poi_name;
+      
+      poi_name = webmap.geojsonPOI[index].properties.name;
+      if (webmap.geojsonPOI[index].properties.amenity === 'school' || webmap.geojsonPOI[index].properties.amenity === 'bank') { 
+         var poi_city = webmap.geojsonPOI[index].properties['addr:city'];
+      	if (poi_city != undefined) { 
+      	   poi_name = poi_name + ' (' + poi_city + ')'
+      	}
+         else {
+      	   console.log('No city name for school / bank')
+      	}
+      }      
+            
+      return poi_name;
+   },	
+	
 	// Test if feature is in category and return corresponding icon file
-   mapCategory : function (feature) {
+   getFeatureTag : function (feature) {
    	// 17/01/2017: why not using JSON.parse() here: useful if want to have an object instead of a string
-      var cat, img_file, OSM_key_in_geojson, OSM_value_in_geojson    	
+      var tag;  	
 
       if (feature.properties.amenity != undefined){
-     	   OSM_key_in_geojson = "amenity";
-     	   OSM_value_in_geojson = feature.properties.amenity;      	   
+     	   tag = "amenity" + "=" + feature.properties.amenity;
      	   if (feature.properties.recycling_type != undefined){
-     	      OSM_key_in_geojson = "recycling_type";    
-            OSM_value_in_geojson = feature.properties.recycling_type;    
+     	      tag = "recycling_type" + "=" + feature.properties.recycling_type;       
             //break;            
             //console.log('recycling')     
          }  
@@ -313,39 +332,55 @@ var webmap = {
       	
         if (feature.properties.shop != undefined){
           //console.log('shop')
-     	    OSM_key_in_geojson = "shop";    
-          OSM_value_in_geojson = feature.properties.shop; 
+     	    tag = "shop" + "=" + feature.properties.shop;;    
          // break;        
         } 
         else{
           if (feature.properties.office != undefined) {
-          	OSM_key_in_geojson = "office";    
-            OSM_value_in_geojson = feature.properties.office;
+          	tag = "office" + "=" + feature.properties.office;   
             //break;
             //console.log('office')
           } 
           else{
             if (feature.properties.tourism != undefined) {
-         	  OSM_key_in_geojson = "tourism";    
-              OSM_value_in_geojson = feature.properties.tourism;
+         	  tag = "tourism"+ "=" + feature.properties.tourism;    
               //break;
               //console.log('tourism')                        
             }
             else{
-              OSM_key_in_geojson = undefined;    
-              OSM_value_in_geojson = undefined;
+              tag = undefined;    
               //console.log('undefined?')
             }
           }
         }
       }   
-          
+      
+      return tag;
+   },   
 
+	// Get category
+	getCategory : function (feature) {
      // loop over the category on items.json
+     var tag = webmap.getFeatureTag(feature)
+     console.log(tag)
      for (i = 0; i < items.length; i++) {
-        if (items[i].OSM_key == OSM_key_in_geojson && items[i].OSM_value == OSM_value_in_geojson){
+        if (tag == items[i].OSM_key + "=" + items[i].OSM_value){
            cat = items[i].category;
-           img_file = items[i].png_file;
+           break;
+        }
+     }         
+        
+     return cat;
+   },	
+   
+	// Get image file
+	getImgFile : function (feature) {
+     // loop over the category on items.json
+     var tag = webmap.getFeatureTag(feature)
+     
+     for (i = 0; i < items.length; i++) {
+        if (tag == items[i].OSM_key + "=" + items[i].OSM_value){
+        	  img_file = items[i].png_file;
            break;
         }
         else {
@@ -353,8 +388,8 @@ var webmap = {
         }
      }         
         
-     return [cat, img_file];
-   },	
+     return img_file;
+   },	   
    
 	// display popup
 	makePopupContent : function (feature) {
@@ -395,6 +430,12 @@ var webmap = {
 	
       // highlight icon and/or show popup
       if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      	// Center the map on popup
+      	webmap.Lmap.setView(webmap.markerArr[index]._latlng);
+      	
+      	// Open popups from the list 
+         webmap.markerArr[index].openPopup();
+         
          // Highlight poi on the map
          webmap.highlightPoi(index); 
       }
@@ -449,8 +490,10 @@ var webmap = {
 	},
 	
 	sortLists : function (list) {
+		// Cette fct marche pas (bug autocomletion) parce qe sort n'est pas adapté à des contenus aussi complexe, trier plutot en amont lors du filtrage du geojson?
 	   var list_div = document.getElementById(list);
 	   var list_poi = list_div.getElementsByClassName("poi"); 
+	   console.log(list_poi)
       var vals = [];
       //var vals2 = [];
 
@@ -460,7 +503,9 @@ var webmap = {
        //  vals2.push(list_poi[i].innerText);
 
       // Sort it
+      console.log(vals)
       vals.sort();
+      console.log(vals)
      //  vals2.sort();
       
       // Change the list on the page
@@ -474,7 +519,7 @@ var webmap = {
 
 	// set the style of the function, meaning the icon of the POIs
    stylePoi : function (feature) {
-      var img_src = 'img/' + webmap.mapCategory(feature)[1] + '.png';      
+      var img_src = 'img/' + webmap.getImgFile(feature) + '.png';      
       
       var iconPOI = new L.Icon({
       	iconUrl: img_src,
