@@ -31,8 +31,6 @@ var webmap = {
 	
    // Add points of interests to the list
    add2list: function(index, feature) {
-      console.log(index)
-      console.log(feature)
       
    	var poi_name, poi_content, cat, img_file;
    	  
@@ -49,7 +47,7 @@ var webmap = {
       if (cat === 'horeca') { // TO DO: add here a condition to see if the feature is on the current view 
             
          // Build the item of the list
-         $("#first_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+         $("#first_poi_list").append("<div class='poi'><div id='pid_" + index + "'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div></div>");
          
          // Hide poi_content for each element
          $('#pcid_' + index).hide()           
@@ -57,7 +55,7 @@ var webmap = {
          if (cat === 'commerces') { // TO DO: add here a condition to see if the feature is on the current view 
             
             // Build the item of the list
-            $("#second_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+            $("#second_poi_list").append("<div class='poi'><div id='pid_" + index + "'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div></div>");
          
             // Hide poi_content for each element
             $('#pcid_' + index).hide() 
@@ -65,7 +63,7 @@ var webmap = {
             if (cat === 'services') { // TO DO: add here a condition to see if the feature is on the current view 
             
                // Build the item of the list
-               $("#third_poi_list").append("<div id='pid_" + index + "' class='poi'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div>");
+               $("#third_poi_list").append("<div class='poi'><div id='pid_" + index + "'><div class='poi_icon'><img src='img/" + img_file + ".png' onclick=\"webmap.selectPoi('" + index + "')\"></div><div class='poi_name'><a href=\"javascript:webmap.selectPoi('" + index + "');\">" + poi_name + "</a></div>" + poi_content + "</div></div>");
          
                // Hide poi_content for each element
                $('#pcid_' + index).hide() 
@@ -127,7 +125,7 @@ var webmap = {
       		}
       	else {
      
-            if (webmap.geojsonPOI[i].properties.name == val){  
+            if (webmap.getName(i) == val){  // introduce fuzzy string comparison here... e.g.: é == e could return TRUE
                webmap.selectPoi(i)
                //$('#pid_' + i).show();
                //$('#pcid_' + i).show();
@@ -142,10 +140,11 @@ var webmap = {
    
    filterNoList : function () {
       var val = $('#filterId').val()
-         if (val == "") {
-           $('.poi').show();
+      if (val == "") {
+         for (i = 0; i < webmap.geojsonPOI.length; i++) { 
+            $('#pid_' + i).show(); 
          }
-   
+      } 
    },
 	
    formatInfo : function (index, feature) {
@@ -165,7 +164,7 @@ var webmap = {
       }
       
       return poi_content;
-   }, 	
+   }, 		
 	
    formatAddress : function (feature){
    	var poi_address;
@@ -249,16 +248,14 @@ var webmap = {
    loadGeojson : function(url) {
       var geojsonLayer;  	
    	
-      // Get data
+      // Get webmap.filterArr.sort()data
       $.getJSON(url, function(data) {
          
          // 0) Filter the data!
          cpt = 0;   
          $.each(data.features, function(i, f) { 
             // Filtering
-            ff = webmap.filterGeojson(f); // new index in this fct?
-            
-            // Sorting here?             
+            ff = webmap.filterGeojson(f);       
             
             if (ff != undefined ) {
             	// 1) Set the POI layer
@@ -268,10 +265,6 @@ var webmap = {
                cpt++;
             }             
          }); 
-         
-         //Sorting here? before a add2list  
-         // 1) webmap.geojsonPOI.sort()  // adequate sorting?
-         // 2) for (i = 0; i < webmap.geojsonPOI.length; i++) { webmap.add2list(cpt,ff)} + modif of select fct for opening popups.     
          
          // Add the POI layer 
          var geojsonLayer = webmap.setGeojsonLayer();
@@ -291,9 +284,9 @@ var webmap = {
          });	
          
          // Sort the lists
-         /*webmap.sortLists("first_poi_list"); 
+         webmap.sortLists("first_poi_list"); 
          webmap.sortLists("second_poi_list"); 
-         webmap.sortLists("third_poi_list"); */
+         webmap.sortLists("third_poi_list"); 
       
       });    
    },	
@@ -362,7 +355,7 @@ var webmap = {
 	getCategory : function (feature) {
      // loop over the category on items.json
      var tag = webmap.getFeatureTag(feature)
-     console.log(tag)
+     
      for (i = 0; i < items.length; i++) {
         if (tag == items[i].OSM_key + "=" + items[i].OSM_value){
            cat = items[i].category;
@@ -418,43 +411,43 @@ var webmap = {
 		
 	// Select POI: show poi_content and highlight the poi on the map
 	selectPoi : function (index) {
-      console.log(index)
+     
 		// Show poi_content
 		var ishidden = $('#pcid_' + index).is(':hidden');
 		if(ishidden) {
          $('#pcid_' + index).show();
+      	
+         // highlight icon and/or show popup
+         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      	   // Center the map on popup
+      	   webmap.Lmap.setView(webmap.markerArr[index]._latlng);
+      	
+      	   // Open popups from the list 
+            webmap.markerArr[index].openPopup();
+         
+            // Highlight poi on the map
+            webmap.highlightPoi(index); 
+         }
+         else{
+      	   // Center the map on popup
+      	   webmap.Lmap.setView(webmap.markerArr[index]._latlng);
+      	
+      	   // Open popups from the list 
+            webmap.markerArr[index].openPopup();
+         
+            // Highlight poi on the map
+            webmap.highlightPoi(index); 
+         }	
+      
       }
       else{
       	$('#pcid_' + index).hide();
       }
-	
-      // highlight icon and/or show popup
-      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      	// Center the map on popup
-      	webmap.Lmap.setView(webmap.markerArr[index]._latlng);
-      	
-      	// Open popups from the list 
-         webmap.markerArr[index].openPopup();
-         
-         // Highlight poi on the map
-         webmap.highlightPoi(index); 
-      }
-      else{
-      	// Center the map on popup
-      	webmap.Lmap.setView(webmap.markerArr[index]._latlng);
-      	
-      	// Open popups from the list 
-         webmap.markerArr[index].openPopup();
-         
-         // Highlight poi on the map
-         webmap.highlightPoi(index); 
-      }	
 	},		
 	
 	highlightPoi : function (index) { 
 	   webmap.unhighlightPoi();
 	 
-	   console.log('highlight poi');
 	   var selected_icon = webmap.markerArr[index].options.icon;
       selected_icon.options.iconSize = [42,47]
       webmap.markerArr[index].setIcon(selected_icon)
@@ -464,7 +457,7 @@ var webmap = {
    // on certains conditions, 	unselected_icon.options.iconSize = [32,37]; webmap.markerArr[index].setIcon(unselected_icon)
 	// conditions are: single click but no single click on POI icon, other popup fire,  
    unhighlightPoi : function () {   
-     console.log('unhighlight poi');
+     
      for (var i = 0; i < webmap.markerArr.length; i++) {
         var unselected_icon = webmap.markerArr[i].options.icon;
         unselected_icon.options.iconSize = [32,37]
@@ -490,32 +483,45 @@ var webmap = {
 	},
 	
 	sortLists : function (list) {
-		// Cette fct marche pas (bug autocomletion) parce qe sort n'est pas adapté à des contenus aussi complexe, trier plutot en amont lors du filtrage du geojson?
+		// Cette fct marche pas (bug autocomletion) parce qe sort n'est pas adapté à des contenus aussi complexe, trier plutot en amont lors du filtrage du geojson? Non trier autrement:
 	   var list_div = document.getElementById(list);
 	   var list_poi = list_div.getElementsByClassName("poi"); 
-	   console.log(list_poi)
-      var vals = [];
-      //var vals2 = [];
 
-      // Populate the array
-      for(var i = 0, l = list_poi.length; i < l; i++)
-         vals.push(list_poi[i].innerHTML);
-       //  vals2.push(list_poi[i].innerText);
+	   console.log(list_poi)
+      var vals_html = [];
+      var vals_text = [];
+      var vals_text_unsorted = [];
+      var vals_text_sorted = [];
+      
+      // Populate the array to be sorted
+      for(var i = 0, l = list_poi.length; i < l; i++){
+         vals_html.push(list_poi[i].innerHTML);
+         vals_text.push(list_poi[i].innerText);
+      }
 
       // Sort it
-      console.log(vals)
-      vals.sort();
-      console.log(vals)
-     //  vals2.sort();
+      var vals_text_sorted = vals_text.sort();
       
-      // Change the list on the page
-      for(var i = 0, l = list_poi.length; i < l; i++)
-         list_poi[i].innerHTML = vals[i];
-         //for(var j = 0, l = list_poi.length; j < l; j++)
-         //   console.log(vals[j])
-         //   if (vals2[i] == vals[j].innerText) {list_poi[i].innerHTML = vals[i];}
-	
-	}, 
+      // Re-populate the unsorted array
+      for(var i = 0, l = list_poi.length; i < l; i++){
+         vals_text_unsorted.push(list_poi[i].innerText);
+      }
+      console.log(vals_text_unsorted)  
+      console.log(vals_text_sorted)
+
+      for(var i = 0, l = list_poi.length; i < l; i++){
+         for(var j = 0, l = list_poi.length; j < l; j++){
+
+         	if (vals_text_sorted[i] === vals_text_unsorted[j]) { 
+              //console.log('say yes'+ i + " " + j)
+              // Change the list on the page
+              list_poi[i].innerHTML = vals_html[j];
+
+            }       
+         }
+      }
+
+ 	}, 
 
 	// set the style of the function, meaning the icon of the POIs
    stylePoi : function (feature) {
