@@ -14,7 +14,7 @@ var webmap = {
 	markerLayer: null,
 	markerArr : [],
 	filterArr : [],
-	img_file_list : [],
+	tag_list : [],
 	showPanel : true,
 	showPanelXs : false,
 	url : "data/Habay_05032017.geojson",
@@ -32,20 +32,31 @@ var webmap = {
 
    add2filter: function(){
 		 // list all unique png_file values of items.json and populate the filter boxes in the html
-
+     var tag_list = [];
+		 var img_file_list = [];
 		 for (i = 0; i < webmap.geojsonPOI.length; i++) {
 			 var img_file = webmap.getImgFile(webmap.geojsonPOI[i]);
-			 webmap.img_file_list.push(img_file);
+			 var tag = webmap.getFeatureTag(webmap.geojsonPOI[i]);
+			 tag_list.push(tag);
+			 img_file_list.push(tag);
 		 }
-		 // get unique values
-     img_file_list;
-		 // sort according to good order!
-     img_file_list;
-		 // populate the filter boxes
-		 for (j = 0; j < img_file_list.length; j++) {
-       $("#filterCategory").append("<button type='button' class='btn' onclick='webmap.filterCategory('" + img_file + "')' >" + img_file + ".png</button>");
-		 }
+		 // Get unique values
+		 var unique_tag_list = tag_list.filter(function(itm, i, tag_list) {
+       return i == tag_list.indexOf(itm);
+     });
+		 // TODO sort according to good order!
+     //webmap.tag_list;
 
+		 // populate the filter boxes + TODO nice label
+		 for (j = 0; j < unique_tag_list.length; j++) {
+       $("#filterCategory").append("<label><input id='" +
+			   unique_tag_list[j] +
+				 "' type='checkbox' onclick=\"webmap.filterCategory('" +
+				 unique_tag_list[j] +
+				 "');\" value='' checked='checked'>" +
+				 unique_tag_list[j] + // put icon img instead !!!
+				 "</label>");
+			 }
 	 },
 
    // Add points of interests to the list
@@ -119,32 +130,28 @@ var webmap = {
 	},
 
 	filterCategory : function (tag) {
+		var bounds = webmap.Lmap.getBounds();
     var is_check = document.getElementById(tag).checked;
-		console.log("is it checkec:" + is_check)
+		console.log("is it checked:" + is_check)
     if (is_check) {
-		   // Remove items from the list
-       for (i = 0; i < webmap.geojsonPOI.length; i++) {
-          var unique_tag = webmap.getFeatureTag(webmap.geojsonPOI[i]);
-		      if (unique_tag === tag){ //
-			    // hide item in the list
-			       $('#pid_' + i).show();
-		     }
+		  // Show items in the list
+      for (i = 0; i < webmap.geojsonPOI.length; i++) {
+        var unique_tag = webmap.getFeatureTag(webmap.geojsonPOI[i]);
+		    if (unique_tag === tag){ //
+					if (bounds.contains(L.latLng(webmap.geojsonPOI[i].geometry.coordinates[1], webmap.geojsonPOI[i].geometry.coordinates[0]))) {
+					  // hide item in the list
+			      $('#pid_' + i).show();
+					}
+		    }
 	  	}
 
-		  // Add marker from the map
-      webmap.Lmap.eachLayer(function(layer){
-         if (layer.feature != null){
-		        var unique_tag = webmap.getFeatureTag(layer.feature);
-         }
-         if (unique_tag === tag){
-            console.log('add' + tag)
-				    webmap.Lmap.addLayer(layer);
-			   }
-      });
+		  // Add marker to the map
+      var geojsonLayerByTag = webmap.setGeojsonLayerByTag(tag)
+      webmap.Lmap.addLayer(geojsonLayerByTag);
 		}
 
 		if (!is_check) {
-			// Add items from the list
+			// Remove items from the list
 			for (i = 0; i < webmap.geojsonPOI.length; i++) {
 				 var unique_tag = webmap.getFeatureTag(webmap.geojsonPOI[i]);
 				 if (unique_tag === tag){ //
@@ -152,13 +159,12 @@ var webmap = {
 						$('#pid_' + i).hide();
 				}
 		 }
-		 // Add marker from the map
+		 // Remove marker from the map
 		 webmap.Lmap.eachLayer(function(layer){
 				if (layer.feature != null){
 					 var unique_tag = webmap.getFeatureTag(layer.feature);
 				}
 				if (unique_tag === tag){
-					 console.log('remove' + tag)
 					 webmap.Lmap.removeLayer(layer);
 				}
 		 });
@@ -341,6 +347,9 @@ var webmap = {
          webmap.sortLists("second_poi_list");
          webmap.sortLists("third_poi_list");
 
+				 // Add filter checkboxes
+	 			 webmap.add2filter();
+
       });
    },
 
@@ -520,7 +529,7 @@ var webmap = {
 
 	// Set the GeoJSON layer
 	setGeojsonLayer : function () {
-      var geojsonLayer;
+    var geojsonLayer;
 		geojsonLayer = L.geoJson(webmap.geojsonPOI, {
         pointToLayer: function(feature, latlng) {
                return webmap.markerLayer = L.marker(latlng, {
@@ -533,6 +542,25 @@ var webmap = {
 	        }
       });
 	   return geojsonLayer;
+	},
+
+	// Set the GeoJSON layer - by tag name
+	setGeojsonLayerByTag : function (tag) {
+    var geojsonLayerByTag;
+		geojsonLayerByTag = L.geoJson(webmap.geojsonPOI, {
+        pointToLayer: function(feature, latlng) {
+					var unique_tag = webmap.getFeatureTag(feature);
+					if (unique_tag == tag) {
+               return webmap.markerLayer = L.marker(latlng, {
+	            	  icon: webmap.stylePoi(feature)
+	            	  });
+							 }
+            },
+        onEachFeature: function (feature, layer) {
+			    layer.bindPopup(webmap.makePopupContent(feature));
+	        }
+      });
+	   return geojsonLayerByTag;
 	},
 
 	sortLists : function (list) {
