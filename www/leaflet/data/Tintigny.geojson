@@ -1,0 +1,1105 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2018-01-07T19:46:02Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/83462424",
+        "amenity": "school",
+        "building": "school",
+        "name": "École Communale",
+        "source": "Bing"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.4973214,
+              49.6664749
+            ],
+            [
+              5.4972419,
+              49.6663727
+            ],
+            [
+              5.4974827,
+              49.6662942
+            ],
+            [
+              5.4975622,
+              49.6663965
+            ],
+            [
+              5.4973214,
+              49.6664749
+            ]
+          ]
+        ]
+      },
+      "id": "way/83462424"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/93026835",
+        "building": "yes",
+        "name": "Proxy Delhaize",
+        "shop": "convenience"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.4966423,
+              49.6643626
+            ],
+            [
+              5.4966892,
+              49.6639681
+            ],
+            [
+              5.4969291,
+              49.6639775
+            ],
+            [
+              5.4968867,
+              49.6643725
+            ],
+            [
+              5.4966423,
+              49.6643626
+            ]
+          ]
+        ]
+      },
+      "id": "way/93026835"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313910748",
+        "amenity": "school",
+        "name": "École Communale"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.4895289,
+              49.6938201
+            ],
+            [
+              5.4894055,
+              49.6937143
+            ],
+            [
+              5.4895745,
+              49.6936466
+            ],
+            [
+              5.4896925,
+              49.6937559
+            ],
+            [
+              5.4895289,
+              49.6938201
+            ]
+          ]
+        ]
+      },
+      "id": "way/313910748"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313910753",
+        "amenity": "school",
+        "name": "École Communale"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.4743285,
+              49.6772783
+            ],
+            [
+              5.4744146,
+              49.67714
+            ],
+            [
+              5.474762,
+              49.6772376
+            ],
+            [
+              5.4746721,
+              49.6773726
+            ],
+            [
+              5.4743285,
+              49.6772783
+            ]
+          ]
+        ]
+      },
+      "id": "way/313910753"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313910754",
+        "amenity": "school",
+        "building": "yes",
+        "name": "École Communale",
+        "source": "Bing"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.5125394,
+              49.6790302
+            ],
+            [
+              5.5126723,
+              49.679027
+            ],
+            [
+              5.5127045,
+              49.6790025
+            ],
+            [
+              5.5127736,
+              49.6790002
+            ],
+            [
+              5.5127884,
+              49.6790177
+            ],
+            [
+              5.5129066,
+              49.67901
+            ],
+            [
+              5.5129178,
+              49.6791984
+            ],
+            [
+              5.5128883,
+              49.6792106
+            ],
+            [
+              5.5127783,
+              49.67928
+            ],
+            [
+              5.5127836,
+              49.6793217
+            ],
+            [
+              5.5126978,
+              49.6793703
+            ],
+            [
+              5.5126656,
+              49.6793668
+            ],
+            [
+              5.5126469,
+              49.6793876
+            ],
+            [
+              5.5126945,
+              49.679419
+            ],
+            [
+              5.5127001,
+              49.6795265
+            ],
+            [
+              5.5125676,
+              49.6796165
+            ],
+            [
+              5.5124832,
+              49.6795733
+            ],
+            [
+              5.5124215,
+              49.6795421
+            ],
+            [
+              5.5124081,
+              49.6794622
+            ],
+            [
+              5.512435,
+              49.6794466
+            ],
+            [
+              5.5124126,
+              49.6793149
+            ],
+            [
+              5.512502,
+              49.679313
+            ],
+            [
+              5.5125422,
+              49.6792904
+            ],
+            [
+              5.5125369,
+              49.6792609
+            ],
+            [
+              5.5125932,
+              49.6792436
+            ],
+            [
+              5.5126093,
+              49.6792158
+            ],
+            [
+              5.5125637,
+              49.6791828
+            ],
+            [
+              5.5125394,
+              49.6790302
+            ]
+          ]
+        ]
+      },
+      "id": "way/313910754"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313912117",
+        "amenity": "school",
+        "name": "École Communale"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.5011563,
+              49.6455498
+            ],
+            [
+              5.5013486,
+              49.6453758
+            ],
+            [
+              5.5015705,
+              49.6454766
+            ],
+            [
+              5.5014696,
+              49.6455574
+            ],
+            [
+              5.501369,
+              49.6455131
+            ],
+            [
+              5.5012661,
+              49.645606
+            ],
+            [
+              5.5011563,
+              49.6455498
+            ]
+          ]
+        ]
+      },
+      "id": "way/313912117"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/432328742",
+        "amenity": "pub",
+        "building": "yes",
+        "name": "R.E. Rossignol"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.4833848,
+              49.7191496
+            ],
+            [
+              5.4835782,
+              49.7190711
+            ],
+            [
+              5.4836655,
+              49.7191611
+            ],
+            [
+              5.4836063,
+              49.7191851
+            ],
+            [
+              5.4836343,
+              49.7192139
+            ],
+            [
+              5.4835001,
+              49.7192684
+            ],
+            [
+              5.4833848,
+              49.7191496
+            ]
+          ]
+        ]
+      },
+      "id": "way/432328742"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/443649230",
+        "addr:housenumber": "66",
+        "addr:street": "Rue du Vieux Moulin",
+        "amenity": "school",
+        "name": "École de Rossignol"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.4834044,
+              49.718624
+            ],
+            [
+              5.4828947,
+              49.71792
+            ],
+            [
+              5.4838442,
+              49.7177188
+            ],
+            [
+              5.4839485,
+              49.7179481
+            ],
+            [
+              5.4840962,
+              49.7184451
+            ],
+            [
+              5.4834044,
+              49.718624
+            ]
+          ]
+        ]
+      },
+      "id": "way/443649230"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/83462424",
+        "amenity": "school",
+        "building": "school",
+        "name": "École Communale",
+        "source": "Bing",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.497402,
+          49.6663846
+        ]
+      },
+      "id": "way/83462424"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/93026835",
+        "building": "yes",
+        "name": "Proxy Delhaize",
+        "shop": "convenience",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4967857,
+          49.6641703
+        ]
+      },
+      "id": "way/93026835"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313910748",
+        "amenity": "school",
+        "name": "École Communale",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.489549,
+          49.6937334
+        ]
+      },
+      "id": "way/313910748"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313910753",
+        "amenity": "school",
+        "name": "École Communale",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4745453,
+          49.6772563
+        ]
+      },
+      "id": "way/313910753"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313910754",
+        "amenity": "school",
+        "building": "yes",
+        "name": "École Communale",
+        "source": "Bing",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.512663,
+          49.6793083
+        ]
+      },
+      "id": "way/313910754"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/313912117",
+        "amenity": "school",
+        "name": "École Communale",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5013634,
+          49.6454909
+        ]
+      },
+      "id": "way/313912117"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/432328742",
+        "amenity": "pub",
+        "building": "yes",
+        "name": "R.E. Rossignol",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4835252,
+          49.7191698
+        ]
+      },
+      "id": "way/432328742"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/443649230",
+        "addr:housenumber": "66",
+        "addr:street": "Rue du Vieux Moulin",
+        "amenity": "school",
+        "name": "École de Rossignol",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4834954,
+          49.7181714
+        ]
+      },
+      "id": "way/443649230"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/971771098",
+        "shop": "butcher"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4967498,
+          49.6656395
+        ]
+      },
+      "id": "node/971771098"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/971771102",
+        "name": "Fleuriste",
+        "shop": "florist"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4965182,
+          49.665158
+        ]
+      },
+      "id": "node/971771102"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/971771164",
+        "shop": "bakery"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4946748,
+          49.6653327
+        ]
+      },
+      "id": "node/971771164"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/971771199",
+        "amenity": "library",
+        "name": "Bibliothèque Communale"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4969827,
+          49.6662718
+        ]
+      },
+      "id": "node/971771199"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/971771298",
+        "amenity": "bank",
+        "atm": "yes",
+        "name": "AXA Banque",
+        "operator": "AXA Banque"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4961141,
+          49.6647987
+        ]
+      },
+      "id": "node/971771298"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1954430990",
+        "name": "Boulangerie Destrée-Gribaumont",
+        "shop": "bakery"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5174192,
+          49.6822237
+        ]
+      },
+      "id": "node/1954430990"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1954433379",
+        "amenity": "pharmacy",
+        "dispensing": "yes",
+        "name": "MultiPharma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5119046,
+          49.6834281
+        ]
+      },
+      "id": "node/1954433379"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1954434476",
+        "addr:city": "Tintigny",
+        "addr:housenumber": "30",
+        "addr:postcode": "6730",
+        "addr:street": "Grand-Rue",
+        "amenity": "restaurant",
+        "cuisine": "regional",
+        "name": "La Vieille Gaume"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5205038,
+          49.6827131
+        ]
+      },
+      "id": "node/1954434476"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1954435900",
+        "addr:housenumber": "76",
+        "addr:street": "Grand-Rue",
+        "amenity": "townhall",
+        "name": "Maison Communale de Tintigny"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5136695,
+          49.6831435
+        ]
+      },
+      "id": "node/1954435900"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1954494179",
+        "amenity": "kindergarten",
+        "name": "Maison d'enfants Lollypop"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5125054,
+          49.6834177
+        ]
+      },
+      "id": "node/1954494179"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3169815108",
+        "addr:city": "Tintigny",
+        "addr:housename": "Café Kotala Sébastien",
+        "addr:housenumber": "77",
+        "addr:postcode": "6730",
+        "addr:street": "Grand-Rue",
+        "amenity": "pub",
+        "name": "Café Kotala",
+        "old_name": "Café Muttesch, La Récré"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5137714,
+          49.683451
+        ]
+      },
+      "id": "node/3169815108"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3171675881",
+        "amenity": "restaurant",
+        "name": "Au Moulin Gourmand"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4516768,
+          49.6904782
+        ]
+      },
+      "id": "node/3171675881"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3174116343",
+        "addr:city": "Tintigny",
+        "addr:housename": "Les Routiers",
+        "addr:postcode": "6730",
+        "addr:street": "Grand-Rue",
+        "alt_name": "Chez Dédée et Pierrot",
+        "amenity": "fast_food",
+        "cuisine": "friture",
+        "name": "Friterie \"Les Routiers\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5276283,
+          49.6795249
+        ]
+      },
+      "id": "node/3174116343"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3174116344",
+        "addr:city": "Tintigny",
+        "addr:housename": "La Fontaine aux Lions",
+        "addr:housenumber": "50",
+        "addr:postcode": "6730",
+        "addr:street": "Rue de France",
+        "amenity": "restaurant",
+        "cuisine": "regional",
+        "name": "Chez Jo",
+        "old_name": "La Fontaine aux Lions"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5129507,
+          49.6831192
+        ]
+      },
+      "id": "node/3174116344"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3181234245",
+        "amenity": "pub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5130581,
+          49.6831194
+        ]
+      },
+      "id": "node/3181234245"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3193883741",
+        "amenity": "pub",
+        "name": "Aux 2 Eaux"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.524413,
+          49.6913967
+        ]
+      },
+      "id": "node/3193883741"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3195061191",
+        "amenity": "cafe",
+        "name": "Caféteria \"Au Château\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4858582,
+          49.7168318
+        ]
+      },
+      "id": "node/3195061191"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3199503755",
+        "amenity": "pub",
+        "name": "La Breuvannoise"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.489451,
+          49.693638
+        ]
+      },
+      "id": "node/3199503755"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3199506701",
+        "addr:city": "Breuvanne",
+        "addr:housenumber": "90",
+        "addr:postcode": "6730",
+        "addr:street": "Rue des Saucettes",
+        "name": "Pépinières La Gaume",
+        "opening_hours": "Mo-Fr 09:00-18:30; Sa 09:00-17:30",
+        "phone": "+32 63 44 00 70",
+        "shop": "garden_centre",
+        "website": "http://www.pepiniereslagaume.be/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4879335,
+          49.6910613
+        ]
+      },
+      "id": "node/3199506701"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3199538574",
+        "amenity": "school"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4744951,
+          49.677199
+        ]
+      },
+      "id": "node/3199538574"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3199538579",
+        "amenity": "school"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4973125,
+          49.6663066
+        ]
+      },
+      "id": "node/3199538579"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3199538580",
+        "amenity": "school"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4895529,
+          49.6936849
+        ]
+      },
+      "id": "node/3199538580"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3199538583",
+        "amenity": "school"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5013385,
+          49.6454281
+        ]
+      },
+      "id": "node/3199538583"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3481113721",
+        "addr:city": "Rossignol",
+        "addr:country": "BE",
+        "addr:housenumber": "284",
+        "addr:postcode": "6730",
+        "addr:street": "Rue de la Civanne",
+        "contact:phone": "+32 0496 54 16 57",
+        "name": "La Civanne",
+        "opening_hours": "We 09:00-12:00,14:00-17:00; Fr 10:00-12:00,14:00-18:30; Sa 10:00-12:00,14:00-18:00",
+        "organic": "yes",
+        "shop": "convenience",
+        "website": "http://www.lacivanne.be/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5111741,
+          49.7181873
+        ]
+      },
+      "id": "node/3481113721"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3777085966",
+        "name": "Bitaine",
+        "shop": "bakery"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5130486,
+          49.6832439
+        ]
+      },
+      "id": "node/3777085966"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3788640907",
+        "addr:city": "Tintigny",
+        "addr:housenumber": "37",
+        "addr:postcode": "6730",
+        "addr:street": "Grand-Rue",
+        "name": "Les Parquets Georges Jacques",
+        "opening_hours": "Tu-Sa 09:00-12:00, 13:30-18:30",
+        "phone": "+32 63 44 40 40",
+        "shop": "trade",
+        "website": "http://plancher.be/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.519218,
+          49.682409
+        ]
+      },
+      "id": "node/3788640907"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3820003098",
+        "amenity": "restaurant",
+        "cuisine": "regional"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5138671,
+          49.6834491
+        ]
+      },
+      "id": "node/3820003098"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3820003099",
+        "addr:city": "Tintigny",
+        "addr:housenumber": "30",
+        "addr:postcode": "6730",
+        "addr:street": "Grand-Rue",
+        "amenity": "fast_food",
+        "cuisine": "sandwich",
+        "name": "Sandwicherie 4’in"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5206158,
+          49.6827134
+        ]
+      },
+      "id": "node/3820003099"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4314916330",
+        "addr:city": "Rossignol",
+        "addr:housenumber": "243",
+        "addr:postcode": "6730",
+        "addr:street": "Rue des Écoles",
+        "description": "Bed and Breakfast 2 rooms",
+        "guest_house": "bed_and_breakfast",
+        "name": "A Quiet Place",
+        "phone": "+32495323234",
+        "rooms": "2",
+        "source:date": "2016-07-21",
+        "tourism": "guest_house",
+        "website": "http://www.aquietplace.eu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4873915,
+          49.7183888
+        ]
+      },
+      "id": "node/4314916330"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5015436812",
+        "addr:city": "Tintigny",
+        "addr:housenumber": "7",
+        "addr:postcode": "6730",
+        "addr:street": "Rue de la Station",
+        "name": "Multi - Mat Tintigny",
+        "phone": "+32 63 44 42 00",
+        "shop": "trade"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5442136,
+          49.6760599
+        ]
+      },
+      "id": "node/5015436812"
+    }
+  ]
+}
