@@ -1,6 +1,6 @@
 /*!
  * Carte Des Services
- * Copyright 2016-2017 Julien Minet 
+ * Copyright 2016-2017 Julien Minet
  * Licensed under the MIT license
  */
 
@@ -116,7 +116,7 @@ items = [
  {
    "OSM_key": "amenity",
    "OSM_value": "doctors",
-   "png_file": "",
+   "png_file": "medicine",
    "category": "services"
  },
  {
