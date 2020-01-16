@@ -17,7 +17,7 @@ var webmap = {
 	tag_list : [],
 	showPanel : true,
 	showPanelXs : false,
-	url : "data/Habay_05032017.geojson",
+	url : "data/Habay.geojson",
 
 	/////////////
 	// OBJECTS //

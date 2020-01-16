@@ -4,15 +4,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><!-- needed for responsiveness -->
   <meta name="title" content="Carte des Services" />
-  <meta name="robots" content="index,follow" /> 
-  <meta name="author" content="Julien" />
+  <meta name="robots" content="index,follow" />
+  <meta name="author" content="Julien Minet" />
   <link rel="stylesheet" href="lib/bootstrap-3.3.6-dist/css/bootstrap.css"><!-- debug css version-->
   <link rel="stylesheet" href="lib/jquery-ui-1.12.0/jquery-ui.css">
   <link rel="stylesheet" href="lib/leaflet/leaflet.css" type="text/css" />
   <link rel="stylesheet" href="css/style.css" type="text/css" />
  </head>
- <body> 
- 
+ <body>
+
    <!-- navigation bar -->
   <nav class="navbar navbar-fixed-top header" role="navigation">
    <div>
@@ -25,32 +25,32 @@
    </ul>
    </div>
   </nav>
-   
+
   <div class="container bodyContainer">
-   <div class="row mapContainer"> 
-   
-    <!-- panel --> 
-    
-    <div id="collapseBtnXs" class="visible-xs">   
+   <div class="row mapContainer">
+
+    <!-- panel -->
+
+    <div id="collapseBtnXs" class="visible-xs">
       <button type="button" class="btn"  onclick="webmap.collapsePanelXs();"><img src="img/icon_info.png"></button>
     </div>
-       
-    <div id="panel" >  
-    
-      <div id="collapseBtn" class="hidden-xs">     
+
+    <div id="panel" >
+
+      <div id="collapseBtn" class="hidden-xs">
        <button type="button" class="btn"  onclick="webmap.collapsePanel();"><</button>
-      </div> 
-      <div id="closeBtnXs" class="visible-xs">     
+      </div>
+      <div id="closeBtnXs" class="visible-xs">
        <button type="button" class="btn btn-md"  onclick="webmap.collapsePanelXs();">&#8592;</button>
-      </div> 
+      </div>
       <div id="filterBox" class="ui-widget btn-group" >
         <input id="filterId" class="form-control" placeholder="Rechercher..." >
-        <span id="filterClear" class="glyphicon glyphicon-remove-circle"></span>         
+        <span id="filterClear" class="glyphicon glyphicon-remove-circle"></span>
       </div>
-      
-      <div class="container-fluid" id="panelContent"> 
-      
-        <div id="list"> 
+
+      <div class="container-fluid" id="panelContent">
+
+        <div id="list">
           <div id="listHeader">Cliquer sur les noms pour plus de détails</div>
           <div class='poi_title' id='first_poi_title'>Horeca</div><div id='first_poi_list'></div>
           <div class='poi_title' id='second_poi_title'>Commerces</div><div id='second_poi_list'></div>
@@ -58,19 +58,18 @@
         </div>
       </div>
     </div>
-    
+
     <!-- map -->
-    <div class="col-xs-12" id="map" ></div> 
-    
+    <div class="col-xs-12" id="map" ></div>
+
    </div>
   </div>
-  
+
   <script type="text/javascript" src="lib/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
   <script type="text/javascript" src="lib/jquery-ui-1.12.0/jquery-ui.js"></script>
-  <script type="text/javascript" src="lib/leaflet/leaflet.js"></script> 
+  <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
   <script type="text/javascript" src="items.json"></script>
   <script type="text/javascript" src="map.js"></script>
- </body>  
+ </body>
 </html>
-

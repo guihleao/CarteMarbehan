@@ -16,7 +16,7 @@ var webmap = {
 	filterArr : [],
 	showPanel : true,
 	showPanelXs : false,
-	url : "data/Habay_11022017.geojson",
+	url : "data/Habay.geojson",
 
 	/////////////
 	// OBJECTS //
@@ -572,20 +572,20 @@ var webmap = {
 		webmap.showMapPanel();
 
 		// Add a background layer (LeafletJS)
-      var baseLayer = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
-	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Icons from <a href="https://mapicons.mapsmarker.com">Maps Icons Collection</a>',
-	      subdomains: 'abcd',
-	      minZoom: 0,
-	      maxZoom: 20,
-	      ext: 'png'
-      });
+      // var baseLayer = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
+	    //   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Icons from <a href="https://mapicons.mapsmarker.com">Maps Icons Collection</a>',
+	    //   subdomains: 'abcd',
+	    //   minZoom: 0,
+	    //   maxZoom: 20,
+	    //   ext: 'png'
+      // });
 
       // Put the zoom icon on the top right of the map
       webmap.Lmap.zoomControl.setPosition('topright');
 
-      /*var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+     var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      });*/
+     });
 	   webmap.Lmap.addLayer(baseLayer);
 
       // Load Geojson, add layer and populate the list
